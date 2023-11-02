@@ -25,26 +25,29 @@ public class GridManager : MonoBehaviour
 
     public void CombineGrids(GameObject g1,GameObject g2)
     {
-        if (g1.transform.parent != null)
+        if (g1.transform.parent != null && g1.transform.parent != g2.transform.parent)
         {
-            GameObject OldParent = g2.transform.parent.gameObject;
+            Debug.Log("a");
+            Transform OldParent = g2.transform.parent;
 
             g2.transform.parent = g1.transform.parent;
 
             if (OldParent != null)
-                Destroy(OldParent);
+                Destroy(OldParent.gameObject);
         }
-        else if (g2.transform.parent != null)
+        else if (g2.transform.parent != null && g1.transform.parent != g2.transform.parent)
         {
-            GameObject OldParent = g1.transform.parent.gameObject;
+            Debug.Log("b");
+            Transform OldParent = g1.transform.parent;
 
             g1.transform.parent = g2.transform.parent;
 
             if (OldParent != null)
-                Destroy(OldParent);
+                Destroy(OldParent.gameObject);
         }
-        else 
+        else if (g1.transform.parent == null && g2.transform.parent == null) 
         {
+            Debug.Log("c");
             GameObject Parent = new GameObject();
 
             g1.transform.parent = Parent.transform;
