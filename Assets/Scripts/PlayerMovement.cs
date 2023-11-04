@@ -17,12 +17,12 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float Speed = 0.3f;
 
-    private IDictionary<Direction, float> movementTimeSpeedMap = new Dictionary<Direction, float>
+    private IDictionary<Vector3, float> movementTimeSpeedMap = new Dictionary<Vector3, float>
         {
-            {Direction.East, 0f},
-            {Direction.West, 0f},
-            {Direction.North, 0f},
-            {Direction.South, 0f},
+            {Vector3.right, 0f},
+            {Vector3.left, 0f},
+            {Vector3.up, 0f},
+            {Vector3.down, 0f},
         };
 
     private void Awake()
@@ -38,29 +38,29 @@ public class PlayerMovement : MonoBehaviour
 
         if (Movement.x > 0)
         {
-            Move(Direction.East, transform.position + transform.right);
+            Move(Vector3.right);
         }
         else if (Movement.x < 0)
         {
-            Move(Direction.West, transform.position - transform.right);
+            Move(Vector3.left);
         }
         else if (Movement.y > 0)
         {               
-            Move(Direction.North, transform.position + transform.up);
+            Move(Vector3.up);
         }
         else if (Movement.y < 0)
         {
-            Move(Direction.South, transform.position - transform.up);
+            Move(Vector3.down);
         }
     }
     
-    void Move(Direction direction,Vector3 EndValue)
+    void Move(Vector3 EndValue)
     {
-        movementTimeSpeedMap[direction] += Time.deltaTime;
+        movementTimeSpeedMap[EndValue] += Time.deltaTime;
         if (!DOTween.IsTweening(transform))
         {
-            transform.DOMove(EndValue, EvalSpeed(movementTimeSpeedMap[direction]));
-            movementTimeSpeedMap[direction] = 0;
+            transform.DOMove(transform.position + EndValue, EvalSpeed(movementTimeSpeedMap[EndValue]));
+            movementTimeSpeedMap[EndValue] = 0;
         }
     }
 
