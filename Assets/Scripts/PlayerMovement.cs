@@ -50,13 +50,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
-    void Move(Vector3 EndValue)
+    void Move(Vector3 dir)
     {
-        movementTimeSpeedMap[EndValue] += Time.deltaTime;
+        movementTimeSpeedMap[dir] += Time.deltaTime;
         if (!DOTween.IsTweening(transform))
         {
-            transform.DOMove(transform.position + EndValue, EvalSpeed(movementTimeSpeedMap[EndValue]));
-            movementTimeSpeedMap[EndValue] = 0;
+            transform.DOMove(transform.position + dir, EvalSpeed(movementTimeSpeedMap[dir]));
+            movementTimeSpeedMap[dir] = 0;
         }
     }
 
