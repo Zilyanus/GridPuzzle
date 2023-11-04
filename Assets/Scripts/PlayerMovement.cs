@@ -5,10 +5,6 @@ using System.Xml;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum Direction
-{
-    North,South,West,East
-}
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -45,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
             Move(Vector3.left);
         }
         else if (Movement.y > 0)
-        {               
+        {
             Move(Vector3.up);
         }
         else if (Movement.y < 0)
@@ -66,6 +62,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float EvalSpeed(float presseDuratıon)
     {
-        return Speed / pressedTımeSpeedCurve.Evaluate(presseDuratıon);
+        return Speed / Mathf.Clamp(pressedTımeSpeedCurve.Evaluate(presseDuratıon), 1f, 15f);
     }
 }
