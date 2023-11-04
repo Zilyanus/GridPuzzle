@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ISurroundControl<T> : MonoBehaviour
+public abstract class SurroundControl<T> : MonoBehaviour
 {
     public List<int> Surrounding = new List<int>() {0,0,0,0 };
     public LayerMask layerMask;

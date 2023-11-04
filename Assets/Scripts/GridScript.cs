@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridScript : ISurroundControl<Vector2>
+public class GridScript : SurroundControl<Vector2>
 {
     GridManager gridManager;
     // Start is called before the first frame update
