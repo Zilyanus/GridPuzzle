@@ -6,6 +6,7 @@ public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;
 
+    [SerializeField] GameObject SubGrid;
     private void Awake()
     {
         Instance = this;
@@ -24,11 +25,10 @@ public class GridManager : MonoBehaviour
     }
 
     public void CombineGrids(GameObject g1,GameObject g2)
-    {
+    {       
         GridParent gridParent = null;
         if (g1.transform.parent != null && g1.transform.parent != g2.transform.parent)
         {
-            Debug.Log("a");
             Transform OldParent = g2.transform.parent;
 
             g2.transform.parent = g1.transform.parent;
@@ -40,7 +40,6 @@ public class GridManager : MonoBehaviour
         }
         else if (g2.transform.parent != null && g1.transform.parent != g2.transform.parent)
         {
-            Debug.Log("b");
             Transform OldParent = g1.transform.parent;
 
             g1.transform.parent = g2.transform.parent;
@@ -52,7 +51,6 @@ public class GridManager : MonoBehaviour
         }
         else if (g1.transform.parent == null && g2.transform.parent == null) 
         {
-            Debug.Log("c");
             GameObject Parent = new GameObject();
             Parent.name = "GridParent";
             gridParent = Parent.AddComponent<GridParent>();
@@ -60,9 +58,25 @@ public class GridManager : MonoBehaviour
             g1.transform.parent = Parent.transform;
             g2.transform.parent = Parent.transform;
         }
+        else
+        {
+            return;
+        }
+        
+        SpawnSubGrid(g1, g2,gridParent.transform);
 
         if (gridParent != null)
             gridParent.ControlChilds();
+
+    }
+
+    void SpawnSubGrid(GameObject g1,GameObject g2,Transform GridParent)
+    {
+        Debug.Log("SpawnedSubGird");
+        Vector3 Pos = (g1.transform.position + g2.transform.position)/2;
+
+        GameObject NewSubGrid = Instantiate<GameObject>(SubGrid, GridParent);
+        NewSubGrid.transform.position = Pos;
     }
 
     public GridParent CreateParent(GameObject gameObject)

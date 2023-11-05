@@ -8,7 +8,7 @@ public class GridScript : SurroundControl<Vector2>
 {
     GridManager gridManager;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         gridManager = GridManager.Instance;
         ControlSurround();

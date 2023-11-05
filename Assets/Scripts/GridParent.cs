@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GridParent : SurroundControl<int>
 {
-    [SerializeField] List<GameObject> Grids = new List<GameObject>();
+    [SerializeField] List<SurroundControl<Vector2>> Grids = new List<SurroundControl<Vector2>>();
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +32,12 @@ public class GridParent : SurroundControl<int>
         int SurroundInt = 0;
         for (int i = 0; i < Grids.Count; i++)
         {
-            Grids[i].GetComponent<GridScript>().ControlSurround();
-            if (Grids[i].GetComponent<GridScript>().Surrounding[index] == 2)
+            Grids[i].ControlSurround();
+            if (Grids[i].Surrounding[index] == 2)
             {
                 SurroundInt = 2;
             }
-            else if (Grids[i].GetComponent<GridScript>().Surrounding[index] == -1 && SurroundInt != 2)
+            else if (Grids[i].Surrounding[index] == -1 && SurroundInt != 2)
             {
                 SurroundInt = -1;
             }
@@ -52,8 +52,8 @@ public class GridParent : SurroundControl<int>
         
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).GetComponent<GridScript>() != null)
-                Grids.Add(transform.GetChild(i).gameObject);
+            if (transform.GetChild(i).GetComponent<SurroundControl<Vector2>>() != null)
+                Grids.Add(transform.GetChild(i).GetComponent<SurroundControl<Vector2>>());
         }
     }
 }
