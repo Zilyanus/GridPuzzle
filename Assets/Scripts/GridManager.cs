@@ -64,4 +64,16 @@ public class GridManager : MonoBehaviour
         if (gridParent != null)
             gridParent.ControlChilds();
     }
+
+    public GridParent CreateParent(GameObject gameObject)
+    {
+        GameObject Parent = new GameObject();
+        Parent.name = "GridParent";
+        GridParent gridParent = Parent.AddComponent<GridParent>();
+
+        gameObject.transform.parent = Parent.transform;
+        gridParent.ControlChilds();
+
+        return gridParent;
+    }
 }

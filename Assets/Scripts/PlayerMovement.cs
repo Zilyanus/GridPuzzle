@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +12,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] PlayerInputs InputActions;
 
     [SerializeField] float Speed = 0.3f;
+
+    PlayerSurrounding playerSurrounding;
+
+    GridParent gridParent;
 
     private IDictionary<Vector3, float> movementTimeSpeedMap = new Dictionary<Vector3, float>
         {
@@ -21,10 +25,33 @@ public class PlayerMovement : MonoBehaviour
             {Vector3.down, 0f},
         };
 
+    [SerializeField] LayerMask GridMask;
+
     private void Awake()
     {
         InputActions = new PlayerInputs();
         InputActions.Player.Enable();
+    }
+
+    private void Start()
+    {
+        playerSurrounding = GetComponent<PlayerSurrounding>();
+
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one, 0, Vector2.down,0.1f, GridMask);
+
+        if (hit)
+        {
+            if (hit.transform.parent != null)
+            {
+                gridParent = hit.transform.GetComponentInParent<GridParent>();
+            }
+            else
+            {
+                gridParent = hit.transform.GetComponent<GridScript>().TransformToGridParent();
+            }
+
+            transform.parent = gridParent.transform;
+        }
     }
 
     // Update is called once per frame
@@ -34,28 +61,51 @@ public class PlayerMovement : MonoBehaviour
 
         if (Movement.x > 0)
         {
-            Move(Vector3.right);
+            if (playerSurrounding.Surrounding[2] == 1 && !DOTween.IsTweening(gridParent.transform))
+                Move(Vector3.right,transform);
+            if (playerSurrounding.Surrounding[2] == 0 && gridParent.Surrounding[2] == 0 && !DOTween.IsTweening(transform))
+            {
+                Move(Vector3.right, gridParent.transform);
+            }
         }
         else if (Movement.x < 0)
         {
-            Move(Vector3.left);
+            if (playerSurrounding.Surrounding[3] == 1 && !DOTween.IsTweening(gridParent.transform))
+                Move(Vector3.left, transform);
+            if (playerSurrounding.Surrounding[3] == 0 && gridParent.Surrounding[3] == 0 && !DOTween.IsTweening(transform))
+            {
+                Move(Vector3.left, gridParent.transform);
+            }
         }
         else if (Movement.y > 0)
         {
-            Move(Vector3.up);
+            if (playerSurrounding.Surrounding[0] == 1 && !DOTween.IsTweening(gridParent.transform))
+                Move(Vector3.up, transform);
+            if (playerSurrounding.Surrounding[0] == 0 && gridParent.Surrounding[0] == 0 && !DOTween.IsTweening(transform))
+            {
+                Move(Vector3.up, gridParent.transform);
+            }
         }
         else if (Movement.y < 0)
         {
-            Move(Vector3.down);
+            if (playerSurrounding.Surrounding[1] == 1 && !DOTween.IsTweening(gridParent.transform))
+                Move(Vector3.down, transform);
+            if (playerSurrounding.Surrounding[1] == 0 && gridParent.Surrounding[1] == 0 && !DOTween.IsTweening(transform))
+            {
+                Move(Vector3.down, gridParent.transform);
+            }
         }
+
+        if (InputActions.Player.RestartA.ReadValue<float>() != 0)
+            SceneManager.LoadScene(0);
     }
     
-    void Move(Vector3 dir)
+    void Move(Vector3 dir, Transform transform)
     {
         movementTimeSpeedMap[dir] += Time.deltaTime;
         if (!DOTween.IsTweening(transform))
         {
-            transform.DOMove(transform.position + dir, EvalSpeed(movementTimeSpeedMap[dir]));
+            transform.DOMove(transform.position + dir, EvalSpeed(movementTimeSpeedMap[dir])).OnComplete(() => { transform.GetComponent<GridParent>().ControlSurround(); });
             movementTimeSpeedMap[dir] = 0;
         }
     }
