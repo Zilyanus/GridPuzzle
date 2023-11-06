@@ -10,9 +10,28 @@ public class CollectableScript : MonoBehaviour
     public static UnityEvent OnCollected = new();
     bool isCollected;
 
+    [SerializeField] LayerMask GridMask;
+
     private void Start()
     {
         OnSpawned.Invoke();
+
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one, 0, Vector2.down, 0.1f, GridMask);
+
+        if (hit)
+        {
+            GridParent gridParent = null;
+            if (hit.transform.parent != null)
+            {
+                gridParent = hit.transform.GetComponentInParent<GridParent>();
+            }
+            else
+            {
+                gridParent = hit.transform.GetComponent<GridScript>().TransformToGridParent();
+            }
+
+            transform.parent = gridParent.transform;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

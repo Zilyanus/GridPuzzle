@@ -31,7 +31,15 @@ public class GridManager : MonoBehaviour
         {
             Transform OldParent = g2.transform.parent;
 
-            g2.transform.parent = g1.transform.parent;
+            List<Transform> Childs = new();
+            for (int i = 0; i < OldParent.childCount; i++)
+            {
+                Childs.Add(OldParent.GetChild(i));
+            }
+            for (int i = 0; i < Childs.Count; i++)
+            {
+                Childs[i].parent = g1.transform.parent;
+            }
 
             if (OldParent != null)
                 Destroy(OldParent.gameObject);
@@ -42,7 +50,15 @@ public class GridManager : MonoBehaviour
         {
             Transform OldParent = g1.transform.parent;
 
-            g1.transform.parent = g2.transform.parent;
+            List<Transform> Childs = new();
+            for (int i = 0; i < OldParent.childCount; i++)
+            {
+                Childs.Add(OldParent.GetChild(i));
+            }
+            for (int i = 0; i < Childs.Count; i++)
+            {
+                Childs[i].parent = g2.transform.parent;
+            }
 
             if (OldParent != null)
                 Destroy(OldParent.gameObject);
