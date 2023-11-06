@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         movementTimeSpeedMap[dir] += Time.deltaTime;
         if (!DOTween.IsTweening(transform))
         {
-            transform.DOMove(transform.position + dir, EvalSpeed(movementTimeSpeedMap[dir])).OnComplete(() => { transform.GetComponent<GridParent>().ControlSurround(); });
+            transform.DOMove(transform.position + dir, EvalSpeed(movementTimeSpeedMap[dir])).OnComplete(() => { transform.GetComponent<SurroundControl>().ControlSurround(); });
             movementTimeSpeedMap[dir] = 0;
         }
     }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class GridScript : SurroundControl<Vector2>
+public class GridScript : SurroundControl
 {
     GridManager gridManager;
     // Start is called before the first frame update

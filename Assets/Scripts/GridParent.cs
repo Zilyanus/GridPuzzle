@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GridParent : SurroundControl<int>
+public class GridParent : SurroundControl
 {
-    [SerializeField] List<SurroundControl<Vector2>> Grids = new List<SurroundControl<Vector2>>();
+    [SerializeField] List<SurroundControl> Grids = new List<SurroundControl>();
 
     // Start is called before the first frame update
     void Start()
@@ -21,23 +21,23 @@ public class GridParent : SurroundControl<int>
 
     public override void ControlSurround()
     {
-        Surrounding[0] = Control(0);
-        Surrounding[1] = Control(1);
-        Surrounding[2] = Control(2);
-        Surrounding[3] = Control(3);
+        Surrounding[0] = Control(new Vector2(0, 0));
+        Surrounding[1] = Control(new Vector2(1, 0));
+        Surrounding[2] = Control(new Vector2(2, 0));
+        Surrounding[3] = Control(new Vector2(3, 0));
     }
 
-    public override int Control(int index)
+    public override int Control(Vector2 vector2)
     {
         int SurroundInt = 0;
         for (int i = 0; i < Grids.Count; i++)
         {
             Grids[i].ControlSurround();
-            if (Grids[i].Surrounding[index] == 2)
+            if (Grids[i].Surrounding[(int)vector2.x] == 2)
             {
                 SurroundInt = 2;
             }
-            else if (Grids[i].Surrounding[index] == -1 && SurroundInt != 2)
+            else if (Grids[i].Surrounding[(int)vector2.x] == -1 && SurroundInt != 2)
             {
                 SurroundInt = -1;
             }
@@ -52,8 +52,8 @@ public class GridParent : SurroundControl<int>
         
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).GetComponent<SurroundControl<Vector2>>() != null)
-                Grids.Add(transform.GetChild(i).GetComponent<SurroundControl<Vector2>>());
+            if (transform.GetChild(i).GetComponent<SurroundControl>() != null)
+                Grids.Add(transform.GetChild(i).GetComponent<SurroundControl>());
         }
     }
 }

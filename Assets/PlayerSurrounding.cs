@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSurrounding : SurroundControl<Vector2>
+public class PlayerSurrounding : SurroundControl
 {
     public override int Control(Vector2 vector2)
     {

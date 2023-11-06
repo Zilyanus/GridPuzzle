@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubGridScript : SurroundControl<Vector2>
+public class SubGridScript : SurroundControl
 {
     private void Start()
     {
