@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,15 @@ public class GridParent : SurroundControl
         {
             if (transform.GetChild(i).GetComponent<SurroundControl>() != null)
                 Grids.Add(transform.GetChild(i).GetComponent<SurroundControl>());
+        }
+    }
+
+    public void CombineFeel()
+    {
+        for (int i = 0; i < Grids.Count; i++)
+        {
+            if (Grids[i].GetComponent<GridScript>() != null)
+                Grids[i].transform.DOScale(1.3f, 0.15f).SetLoops(2, LoopType.Yoyo);
         }
     }
 }

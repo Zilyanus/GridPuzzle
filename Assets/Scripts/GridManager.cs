@@ -84,11 +84,11 @@ public class GridManager : MonoBehaviour
         if (gridParent != null)
             gridParent.ControlChilds();
 
+        gridParent.CombineFeel();
     }
 
     void SpawnSubGrid(GameObject g1,GameObject g2,Transform GridParent)
     {
-        Debug.Log("SpawnedSubGird");
         Vector3 Pos = (g1.transform.position + g2.transform.position)/2;
 
         GameObject NewSubGrid = Instantiate<GameObject>(SubGrid, GridParent);
