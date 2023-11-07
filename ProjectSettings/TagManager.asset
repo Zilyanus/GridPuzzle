@@ -41,8 +41,20 @@ TagManager:
   - name: Bg
     uniqueID: 3575608467
     locked: 0
+  - name: Level
+    uniqueID: 530879607
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Grid
+    uniqueID: 3191473115
+    locked: 0
+  - name: Wall
+    uniqueID: 672603515
+    locked: 0
+  - name: Player
+    uniqueID: 1853979303
     locked: 0
   - name: Collectable
     uniqueID: 2274865635

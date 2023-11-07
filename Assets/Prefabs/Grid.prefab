@@ -72,11 +72,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1103494181
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.85098046, g: 0.6784314, b: 0.41960788, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,10 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac424a0931991046afbe402c0db4f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Surrounding: 00000000000000000000000000000000
   layerMask:
     serializedVersion: 2
     m_Bits: 200
-  Surrounding: 00000000000000000000000000000000
 --- !u!61 &3445595353595545367
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -79,12 +79,13 @@ public class GridManager : MonoBehaviour
             return;
         }
         
-        SpawnSubGrid(g1, g2,gridParent.transform);
-
         if (gridParent != null)
+        {
+            SpawnSubGrid(g1, g2,gridParent.transform);
             gridParent.ControlChilds();
-
-        gridParent.CombineFeel();
+            gridParent.CombineFeel();
+        }
+      
     }
 
     void SpawnSubGrid(GameObject g1,GameObject g2,Transform GridParent)
