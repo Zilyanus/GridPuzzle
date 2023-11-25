@@ -44,6 +44,24 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UndoButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa5a3fee-4be4-45fa-8cd3-f5da988124e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RedoButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""ccfb9d7a-2af0-4660-bb21-bcfd950613d3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -233,6 +251,50 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""RestartA"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1df2210-5058-4e25-90f8-660766914627"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UndoButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed30c2e9-5b80-424d-9d3c-61c61036d915"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""UndoButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da5579ec-082a-42c7-aaf4-84c0b486968b"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""RedoButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b40a86ef-086b-4e4d-bc5f-8783a0d141c0"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RedoButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -266,6 +328,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_RestartA = m_Player.FindAction("RestartA", throwIfNotFound: true);
+        m_Player_UndoButton = m_Player.FindAction("UndoButton", throwIfNotFound: true);
+        m_Player_RedoButton = m_Player.FindAction("RedoButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -329,12 +393,16 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_RestartA;
+    private readonly InputAction m_Player_UndoButton;
+    private readonly InputAction m_Player_RedoButton;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
         public PlayerActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @RestartA => m_Wrapper.m_Player_RestartA;
+        public InputAction @UndoButton => m_Wrapper.m_Player_UndoButton;
+        public InputAction @RedoButton => m_Wrapper.m_Player_RedoButton;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -350,6 +418,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @RestartA.started += instance.OnRestartA;
             @RestartA.performed += instance.OnRestartA;
             @RestartA.canceled += instance.OnRestartA;
+            @UndoButton.started += instance.OnUndoButton;
+            @UndoButton.performed += instance.OnUndoButton;
+            @UndoButton.canceled += instance.OnUndoButton;
+            @RedoButton.started += instance.OnRedoButton;
+            @RedoButton.performed += instance.OnRedoButton;
+            @RedoButton.canceled += instance.OnRedoButton;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -360,6 +434,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @RestartA.started -= instance.OnRestartA;
             @RestartA.performed -= instance.OnRestartA;
             @RestartA.canceled -= instance.OnRestartA;
+            @UndoButton.started -= instance.OnUndoButton;
+            @UndoButton.performed -= instance.OnUndoButton;
+            @UndoButton.canceled -= instance.OnUndoButton;
+            @RedoButton.started -= instance.OnRedoButton;
+            @RedoButton.performed -= instance.OnRedoButton;
+            @RedoButton.canceled -= instance.OnRedoButton;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -399,5 +479,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnRestartA(InputAction.CallbackContext context);
+        void OnUndoButton(InputAction.CallbackContext context);
+        void OnRedoButton(InputAction.CallbackContext context);
     }
 }
