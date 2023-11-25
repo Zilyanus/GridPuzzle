@@ -61,36 +61,36 @@ public class PlayerMovement : MonoBehaviour
 
         if (Movement.x > 0)
         {
-            if (playerSurrounding.Surrounding[2] == 1 && !DOTween.IsTweening(gridParent.transform))
+            if (playerSurrounding.GetSurroundAtIndex(2) == 1 && !DOTween.IsTweening(gridParent.transform))
                 Move(Vector3.right,transform);
-            if (playerSurrounding.Surrounding[2] == 0 && gridParent.Surrounding[2] == 0 && !DOTween.IsTweening(transform))
+            if (playerSurrounding.GetSurroundAtIndex(2) == 0 && gridParent.GetSurroundAtIndex(2) == 0 && !DOTween.IsTweening(transform))
             {
                 Move(Vector3.right, gridParent.transform);
             }
         }
         else if (Movement.x < 0)
         {
-            if (playerSurrounding.Surrounding[3] == 1 && !DOTween.IsTweening(gridParent.transform))
+            if (playerSurrounding.GetSurroundAtIndex(3) == 1 && !DOTween.IsTweening(gridParent.transform))
                 Move(Vector3.left, transform);
-            if (playerSurrounding.Surrounding[3] == 0 && gridParent.Surrounding[3] == 0 && !DOTween.IsTweening(transform))
+            if (playerSurrounding.GetSurroundAtIndex(3) == 0 && gridParent.GetSurroundAtIndex(3) == 0 && !DOTween.IsTweening(transform))
             {
                 Move(Vector3.left, gridParent.transform);
             }
         }
         else if (Movement.y > 0)
         {
-            if (playerSurrounding.Surrounding[0] == 1 && !DOTween.IsTweening(gridParent.transform))
+            if (playerSurrounding.GetSurroundAtIndex(0) == 1 && !DOTween.IsTweening(gridParent.transform))
                 Move(Vector3.up, transform);
-            if (playerSurrounding.Surrounding[0] == 0 && gridParent.Surrounding[0] == 0 && !DOTween.IsTweening(transform))
+            if (playerSurrounding.GetSurroundAtIndex(0) == 0 && gridParent.GetSurroundAtIndex(0) == 0 && !DOTween.IsTweening(transform))
             {
                 Move(Vector3.up, gridParent.transform);
             }
         }
         else if (Movement.y < 0)
         {
-            if (playerSurrounding.Surrounding[1] == 1 && !DOTween.IsTweening(gridParent.transform))
+            if (playerSurrounding.GetSurroundAtIndex(1) == 1 && !DOTween.IsTweening(gridParent.transform))
                 Move(Vector3.down, transform);
-            if (playerSurrounding.Surrounding[1] == 0 && gridParent.Surrounding[1] == 0 && !DOTween.IsTweening(transform))
+            if (playerSurrounding.GetSurroundAtIndex(1) == 0 && gridParent.GetSurroundAtIndex(1) == 0 && !DOTween.IsTweening(transform))
             {
                 Move(Vector3.down, gridParent.transform);
             }

@@ -45,10 +45,10 @@ public class GridScript : SurroundControl
 
     public override void ControlSurround()
     {
-        Surrounding[0] = Control(transform.up);
-        Surrounding[1] = Control(-transform.up);
-        Surrounding[2] = Control(transform.right);
-        Surrounding[3] = Control(-transform.right);
+        SetSurroundAtIndex(0, Control(transform.up));
+        SetSurroundAtIndex(1, Control(-transform.up));
+        SetSurroundAtIndex(2, Control(transform.right));
+        SetSurroundAtIndex(3, Control(-transform.right));
     }
 
     public GridParent TransformToGridParent()

@@ -3323,7 +3323,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f300f62e3fec8d74e9dc484eadd591b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Surrounding: 00000000000000000000000000000000
   layerMask:
     serializedVersion: 2
     m_Bits: 200
