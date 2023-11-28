@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (InputActions.Player.RestartA.ReadValue<float>() != 0)
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     void Move(Vector3 dir, Transform transform)
