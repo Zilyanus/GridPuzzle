@@ -13,6 +13,8 @@ public class CollectableScript : MonoBehaviour
 
     [SerializeField] LayerMask GridMask;
 
+    [SerializeField] Transform Effect;
+
     private void Start()
     {
         OnSpawned?.Invoke();
@@ -33,6 +35,8 @@ public class CollectableScript : MonoBehaviour
 
             transform.parent = gridParent.transform;
         }
+
+        Effect.DOScale(1.05f, 0.5f).OnComplete(() => Effect.DOScale(1f, 0.5f)).SetLoops(-1,LoopType.Yoyo);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
