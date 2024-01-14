@@ -9,6 +9,7 @@ public abstract class SurroundControl : MonoBehaviour, ISurroundable
      * 0: Empty
      * 1: Grid
      * 2: Wall
+     * 3: InWall
      */
 
     public LayerMask layerMask;

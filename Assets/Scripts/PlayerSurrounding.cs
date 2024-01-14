@@ -16,6 +16,10 @@ public class PlayerSurrounding : SurroundControl
         {
             return 2;
         }
+        else if (hit && hit.collider.gameObject.layer == 10)
+        {
+            return 3;
+        }
         else if (hit && hit.collider.gameObject.layer == 6)
         {
             return 0;

@@ -14,8 +14,8 @@ TagManager:
   - Background
   - Wall
   - Player
-  - 
-  - 
+  - NeedleWall
+  - InWall
   - 
   - 
   - 
