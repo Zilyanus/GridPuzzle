@@ -40,5 +40,7 @@ public abstract class SurroundControl : MonoBehaviour, ISurroundable
     {
         return transform;
     }
+
+    public abstract Transform ChangeParent(int index);
 }
     

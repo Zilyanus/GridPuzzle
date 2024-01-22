@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +7,20 @@ using UnityEngine;
 
 public class GridParent : SurroundControl
 {
-    private List<ISurroundable> Grids = new List<ISurroundable>();
+    public List<ISurroundable> Grids = new List<ISurroundable>();
+
+    public static event Action<GridParent> OnSpawned;
+    public int GridParentdIndex;
 
     // Start is called before the first frame update
     void Start()
     {
         ControlSurround();
+    }
+
+    public void RegainIndex()
+    {
+        
     }
 
     // Update is called once per frame
@@ -65,5 +74,9 @@ public class GridParent : SurroundControl
             if (Grids[i].GetTransform().GetComponent<GridScript>() != null)
                 Grids[i].GetTransform().DOScale(1.3f, 0.15f).SetLoops(2, LoopType.Yoyo);
         }
+    }
+    public override Transform ChangeParent(int index)
+    {
+        return null;
     }
 }

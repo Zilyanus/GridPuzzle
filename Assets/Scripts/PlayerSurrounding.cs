@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,5 +50,10 @@ public class PlayerSurrounding : SurroundControl
     void Update()
     {
         ControlSurround();
+    }
+
+    public override Transform ChangeParent(int index)
+    {
+        return null;
     }
 }

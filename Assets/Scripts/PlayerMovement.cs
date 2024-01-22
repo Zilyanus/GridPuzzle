@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] LayerMask GridMask;
 
+    MoveInvoker moveInvoker;
+
     private void Awake()
     {
         InputActions = new PlayerInputs();
@@ -35,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        moveInvoker = new MoveInvoker();
+
         playerSurrounding = GetComponent<PlayerSurrounding>();
 
         RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one, 0, Vector2.down,0.1f, GridMask);
@@ -61,46 +65,71 @@ public class PlayerMovement : MonoBehaviour
 
         if (Movement.x > 0)
         {
-            if (playerSurrounding.GetSurroundAtIndex(2) == 1 && !DOTween.IsTweening(gridParent.transform))
-                Move(Vector3.right,transform);
-            if ((playerSurrounding.GetSurroundAtIndex(2) == 0 || playerSurrounding.GetSurroundAtIndex(2) == 3) && gridParent.GetSurroundAtIndex(2) == 0 && !DOTween.IsTweening(transform))
+            if (playerSurrounding.GetSurroundAtIndex(2) == 1 && !DOTween.IsTweening(gridParent.transform) && !DOTween.IsTweening(transform))
             {
-                Move(Vector3.right, gridParent.transform);
+                ICommand moveCommand = new MoveCommand(this, Vector3.right, transform);
+                moveInvoker.AddCommand(moveCommand);
+            }
+            if (playerSurrounding.GetSurroundAtIndex(2) == 0 && gridParent.GetSurroundAtIndex(2) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+            {
+                ICommand moveCommand = new MoveCommand(this, Vector3.right, gridParent.transform);
+                moveInvoker.AddCommand(moveCommand);
             }
         }
         else if (Movement.x < 0)
         {
-            if (playerSurrounding.GetSurroundAtIndex(3) == 1 && !DOTween.IsTweening(gridParent.transform))
-                Move(Vector3.left, transform);
-            if ((playerSurrounding.GetSurroundAtIndex(3) == 0 || playerSurrounding.GetSurroundAtIndex(3) == 3) && gridParent.GetSurroundAtIndex(3) == 0 && !DOTween.IsTweening(transform))
+            if (playerSurrounding.GetSurroundAtIndex(3) == 1 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
             {
-                Move(Vector3.left, gridParent.transform);
+                ICommand moveCommand = new MoveCommand(this, Vector3.left, transform);
+                moveInvoker.AddCommand(moveCommand);
+            }
+            if (playerSurrounding.GetSurroundAtIndex(3) == 0 && gridParent.GetSurroundAtIndex(3) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+            {
+                ICommand moveCommand = new MoveCommand(this, Vector3.left, gridParent.transform);
+                moveInvoker.AddCommand(moveCommand);
             }
         }
         else if (Movement.y > 0)
         {
-            if (playerSurrounding.GetSurroundAtIndex(0) == 1 && !DOTween.IsTweening(gridParent.transform))
-                Move(Vector3.up, transform);
-            if ((playerSurrounding.GetSurroundAtIndex(0) == 0 || playerSurrounding.GetSurroundAtIndex(0) == 3) && gridParent.GetSurroundAtIndex(0) == 0 && !DOTween.IsTweening(transform))
+            if (playerSurrounding.GetSurroundAtIndex(0) == 1 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
             {
-                Move(Vector3.up, gridParent.transform);
+                ICommand moveCommand = new MoveCommand(this, Vector3.up, transform);
+                moveInvoker.AddCommand(moveCommand);
+            }
+            if (playerSurrounding.GetSurroundAtIndex(0) == 0 && gridParent.GetSurroundAtIndex(0) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+            {
+                ICommand moveCommand = new MoveCommand(this, Vector3.up, gridParent.transform);
+                moveInvoker.AddCommand(moveCommand);
             }
         }
         else if (Movement.y < 0)
         {
-            if (playerSurrounding.GetSurroundAtIndex(1) == 1 && !DOTween.IsTweening(gridParent.transform))
-                Move(Vector3.down, transform);
-            if ((playerSurrounding.GetSurroundAtIndex(1) == 0 || playerSurrounding.GetSurroundAtIndex(1) == 3) && gridParent.GetSurroundAtIndex(1) == 0 && !DOTween.IsTweening(transform))
+            if (playerSurrounding.GetSurroundAtIndex(1) == 1 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
             {
-                Move(Vector3.down, gridParent.transform);
+                ICommand moveCommand = new MoveCommand(this, Vector3.down, transform);
+                moveInvoker.AddCommand(moveCommand);
             }
+            if (playerSurrounding.GetSurroundAtIndex(1) == 0 && gridParent.GetSurroundAtIndex(1) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+            {
+                ICommand moveCommand = new MoveCommand(this, Vector3.down, gridParent.transform);
+                moveInvoker.AddCommand(moveCommand);
+            }
+        }
+
+        if (InputActions.Player.UndoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+        {
+            moveInvoker.UndoCommand();
+        }
+        else if (InputActions.Player.RedoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+        {
+            moveInvoker.RedoCommand();
         }
 
         if (InputActions.Player.RestartA.ReadValue<float>() != 0)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
-    void Move(Vector3 dir, Transform transform)
+    public void Move(Vector3 dir, Transform transform)
     {
         movementTimeSpeedMap[dir] += Time.deltaTime;
         if (!DOTween.IsTweening(transform))

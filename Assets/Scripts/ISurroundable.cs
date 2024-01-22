@@ -12,5 +12,7 @@ public interface ISurroundable
 
     int GetSurroundAtIndex(int index);
 
+    Transform ChangeParent(int index);
+
     Transform GetTransform();
 }

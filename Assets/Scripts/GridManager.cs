@@ -45,6 +45,7 @@ public class GridManager : MonoBehaviour
                 Destroy(OldParent.gameObject);
 
             gridParent = g1.GetComponentInParent<GridParent>();
+            gridParent.RegainIndex();
         }
         else if (g2.transform.parent != null && g1.transform.parent != g2.transform.parent)
         {
@@ -64,6 +65,7 @@ public class GridManager : MonoBehaviour
                 Destroy(OldParent.gameObject);
 
             gridParent = g2.GetComponentInParent<GridParent>();
+            gridParent.RegainIndex();
         }
         else if (g1.transform.parent == null && g2.transform.parent == null) 
         {

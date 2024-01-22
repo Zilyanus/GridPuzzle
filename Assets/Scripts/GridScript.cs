@@ -55,4 +55,9 @@ public class GridScript : SurroundControl
     {
         return gridManager.CreateParent(gameObject);
     }
+
+    public override Transform ChangeParent(int index)
+    {
+        return null;
+    }
 }
