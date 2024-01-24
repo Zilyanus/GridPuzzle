@@ -6,6 +6,7 @@ using TMPro;
 using ZilyanusLib.Audio;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 [ExecuteAlways]
 public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
@@ -31,6 +32,8 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     [SerializeField] UnityEvent ButtonDown;
     [SerializeField] UnityEvent ButtonUp;
+    [SerializeField] UnityEvent PointerEnter;
+    [SerializeField] UnityEvent PointerExit;
 
     [Header("Sound")]
 #if UNITY_EDITOR
@@ -50,6 +53,7 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     Button button;
 
     [SerializeField] float ButtonScaleFactor = 1.25f;
+    [SerializeField] float ButtonScaleSpeed = 0.3f;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -104,7 +108,11 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (animator != null)
             animator.SetBool("On", true);
         else if (!Application.isMobilePlatform && (button == null || button.interactable))
-            transform.localScale = new Vector3(DefaultScale.x * ButtonScaleFactor, DefaultScale.y * ButtonScaleFactor, 1);
+        {
+            PointerEnter.Invoke();
+            Vector3 ToScale = new Vector3(DefaultScale.x * ButtonScaleFactor, DefaultScale.y * ButtonScaleFactor, 1);
+            transform.DOScale(ToScale, ButtonScaleSpeed);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -112,7 +120,10 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (animator != null)
             animator.SetBool("On", false);
         else if (!Application.isMobilePlatform && (button == null || button.interactable))
-            transform.localScale = DefaultScale;
+        {
+            PointerExit.Invoke();
+            transform.DOScale(DefaultScale, ButtonScaleSpeed);
+        }
     }
 
     private void OnDisable()
