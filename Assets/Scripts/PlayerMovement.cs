@@ -5,6 +5,8 @@ using System.Xml;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System;
+using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask GridMask;
 
     MoveInvoker moveInvoker;
+
+    public static event Action OnMoved;
 
     private void Awake()
     {
@@ -166,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
         movementTimeSpeedMap[dir] += Time.deltaTime;
         if (!DOTween.IsTweening(transform))
         {
+            OnMoved.Invoke();
             //transform.DOMove(transform.position + dir, EvalSpeed(movementTimeSpeedMap[dir])).OnComplete(() => { transform.GetComponent<SurroundControl>().ControlSurround(); });
             transform.DOMove(transform.position + dir, 0.332f).SetEase(Ease.InOutCubic).OnComplete(() => { transform.GetComponent<SurroundControl>().ControlSurround(); });
             movementTimeSpeedMap[dir] = 0;
