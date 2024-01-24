@@ -2,53 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using ZilyanusLib.Audio;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-[ExecuteAlways]
 public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
-#if UNITY_EDITOR
-    [BackgroundColor(0, 0, 0, 1)]
-#endif
-    [TextArea(3, 10), SerializeField] public string Text = "<b>Custom Button</b>";
-
-
-    [SerializeField] float TextSize = 20;
-
-#if UNITY_EDITOR
-    [BackgroundColor(1, 1, 1, 1)]
-#endif
-    [SerializeField] bool AutoSize;
-
-    [SerializeField] public Color TextColor = new Color(0.5f, 0, 1);
-
-#if UNITY_EDITOR
-    [BackgroundColor(1, 0, 0, 1)]
-#endif
 
     [SerializeField] UnityEvent ButtonDown;
     [SerializeField] UnityEvent ButtonUp;
     [SerializeField] UnityEvent PointerEnter;
     [SerializeField] UnityEvent PointerExit;
 
-    [Header("Sound")]
-#if UNITY_EDITOR
-    [BackgroundColor(1, 1, 0, 1)]
-#endif
     public string ButtonSound;
     [Header("Or")]
     [SerializeField] AudioClip ButtonClip;
 
     Animator animator;
-    TextMeshProUGUI myText;
 
     Vector3 DefaultScale;
-
-    [SerializeField] bool DontOverwriteText;
 
     Button button;
 
@@ -61,31 +34,7 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
         button = GetComponent<Button>();
     }
-   
-    private void Update()
-    {
-        if (!DontOverwriteText)
-        {
-            if (myText != null)
-            {
-                myText.text = Text;
-                if (AutoSize)
-                {
-                    myText.enableAutoSizing = true;
-                }
-                else
-                {
-                    myText.fontSize = TextSize;
-                    myText.enableAutoSizing = false;
-                }
-                myText.color = TextColor;
-            }
-            else
-            {
-                myText = GetComponentInChildren<TextMeshProUGUI>();
-            }
-        }
-    }
+  
 
     public void OnPointerDown(PointerEventData eventData)
     {
