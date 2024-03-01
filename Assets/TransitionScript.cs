@@ -19,16 +19,6 @@ public class TransitionScript : MonoBehaviour
         
     }
 
-    private void OnEnable()
-    {
-        GameManager.OnGameCompleted += OnLevelCompleted;
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnGameCompleted -= OnLevelCompleted;
-    }
-
     public void LoadLevel(int index)
     {
         SceneManager.LoadScene(index);
@@ -49,10 +39,5 @@ public class TransitionScript : MonoBehaviour
     {
         int CurrentLevel = SceneManager.GetActiveScene().buildIndex;
         LoadLevel(CurrentLevel);
-    }
-
-    public void OnLevelCompleted()
-    {
-        DOVirtual.DelayedCall(0.5f, () => LoadNextLevel());
     }
 }

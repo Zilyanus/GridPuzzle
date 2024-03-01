@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public static GridManager Instance;
-
     [SerializeField] GameObject SubGrid;
-    private void Awake()
+
+    private void OnEnable()
     {
-        Instance = this;
+        GridScript.OnCombineGrids.AddListener(CombineGrids);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnDisable()
     {
-        
+        GridScript.OnCombineGrids.RemoveListener(CombineGrids);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void CombineGrids(GameObject g1,GameObject g2)
+    void CombineGrids(GameObject g1,GameObject g2)
     {       
         GridParent gridParent = null;
         if (g1.transform.parent != null && g1.transform.parent != g2.transform.parent)
@@ -96,17 +88,5 @@ public class GridManager : MonoBehaviour
 
         GameObject NewSubGrid = Instantiate<GameObject>(SubGrid, GridParent);
         NewSubGrid.transform.position = Pos;
-    }
-
-    public GridParent CreateParent(GameObject gameObject)
-    {
-        GameObject Parent = new GameObject();
-        Parent.name = "GridParent";
-        GridParent gridParent = Parent.AddComponent<GridParent>();
-
-        gameObject.transform.parent = Parent.transform;
-        gridParent.ControlChilds();
-
-        return gridParent;
     }
 }

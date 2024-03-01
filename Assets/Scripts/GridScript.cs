@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GridScript : SurroundControl
 {
-    GridManager gridManager;
+    public static UnityEvent<GameObject,GameObject> OnCombineGrids = new UnityEvent<GameObject,GameObject>();     
     // Start is called before the first frame update
     void Start()
     {
-        gridManager = GridManager.Instance;
         ControlSurround();
     }
 
@@ -26,7 +26,7 @@ public class GridScript : SurroundControl
         RaycastHit2D hit = Physics2D.Raycast(Pos + vector2 * 4 / 10, vector2, 0.5f, layerMask);
         if (hit && hit.collider.gameObject.layer == 3 && hit.collider.gameObject != gameObject)
         {
-            gridManager.CombineGrids(gameObject, hit.collider.gameObject);
+            OnCombineGrids.Invoke(gameObject, hit.collider.gameObject);
             return 1;
         }
         else if (hit && hit.collider.gameObject.layer == 7)
@@ -53,7 +53,14 @@ public class GridScript : SurroundControl
 
     public GridParent TransformToGridParent()
     {
-        return gridManager.CreateParent(gameObject);
+        GameObject Parent = new GameObject();
+        Parent.name = "GridParent";
+        GridParent gridParent = Parent.AddComponent<GridParent>();
+
+        gameObject.transform.parent = Parent.transform;
+        gridParent.ControlChilds();
+
+        return gridParent;
     }
 
     public override Transform ChangeParent(int index)

@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
 
     public static event Action OnMoved;
 
+    bool isStartAnimationEnded;
+
     private void Awake()
     {
         InputActions = new PlayerInputs();
@@ -64,18 +66,20 @@ public class PlayerMovement : MonoBehaviour
 
             transform.parent = gridParent.transform;
         }
+
+        StartAnimationScript.StartingAnimationEnded.AddListener(() => { isStartAnimationEnded = true; }); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 Movement = InputActions.Player.Movement.ReadValue<Vector2>();
+        Vector2 Movement = isStartAnimationEnded ? InputActions.Player.Movement.ReadValue<Vector2>() : Vector2.zero;
 
         if (Movement.x < 0)
         {
             transform.localScale = new Vector3(-0.9f, 0.9f,1);
         }
-        else if (Movement.x > 0) 
+        else if (Movement.x > 0)
         {
             transform.localScale = new Vector3(0.9f, 0.9f, 1);
         }

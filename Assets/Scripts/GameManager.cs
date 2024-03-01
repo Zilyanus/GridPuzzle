@@ -14,15 +14,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI CollectableText;
     [SerializeField] TextMeshProUGUI MoveText;
     [SerializeField] TextMeshProUGUI LevelText;
+    [SerializeField] TextMeshProUGUI StartLevelText;
+    [SerializeField] TextMeshProUGUI StartCollectableText;
+    [SerializeField] TextMeshProUGUI StartMoveText;
 
     [SerializeField] float TotalMoveCount;
     float MoveCount;
 
-    public static event Action OnGameCompleted;
+    [SerializeField] GameObject EndPanel;
     // Start is called before the first frame update
     void Start()
     {
         LevelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
+        StartLevelText.text = "-" + LevelText.text + "-";
     }
 
     private void OnEnable()
@@ -46,6 +50,9 @@ public class GameManager : MonoBehaviour
     {
         CollectableText.text = CollectedCount + "/" + CollectableCount;
         MoveText.text = (TotalMoveCount - MoveCount > 0 ? TotalMoveCount - MoveCount : 0).ToString();
+
+        StartCollectableText.text = CollectableCount.ToString();
+        StartMoveText.text = TotalMoveCount.ToString();
     }
 
     void OnPlayerMoved()
@@ -70,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     void EndTheGame()
     {
-        OnGameCompleted.Invoke();
+        EndPanel.SetActive(true);
         Debug.Log("Game Ended");
     }
 }

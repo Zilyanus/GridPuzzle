@@ -36,7 +36,7 @@ public class CollectableScript : MonoBehaviour
             transform.parent = gridParent.transform;
         }
 
-        Effect.DOScale(1.05f, 0.5f).OnComplete(() => Effect.DOScale(1f, 0.5f)).SetLoops(-1,LoopType.Yoyo);
+        Effect.DOScale(0.85f, 0.5f).OnComplete(() => Effect.DOScale(0.8f, 0.5f)).SetLoops(-1,LoopType.Yoyo);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
