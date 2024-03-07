@@ -131,13 +131,12 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetFloat("Y", Movement.y);
                 ICommand moveCommand = new MoveCommand(this, Vector3.up, transform);
                 LastCommand = moveCommand;
-                ConfirmMovement();
             }
             if (playerSurrounding.GetSurroundAtIndex(0) == 0 && gridParent.GetSurroundAtIndex(0) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
             {
+                animator.SetFloat("Y", Movement.y);
                 ICommand moveCommand = new MoveCommand(this, Vector3.up, gridParent.transform);
                 LastCommand = moveCommand;
-                ConfirmMovement();
             }
         }
         else if (Movement.y < 0)
