@@ -8,7 +8,7 @@ public class StartAnimationScript : MonoBehaviour
 {
     Sequence sequence;
 
-    float MaxScale = 15;
+    float MaxScale = 45;
 
     [SerializeField] Transform RightPanel;
     [SerializeField] Transform LeftPanel;
@@ -18,12 +18,23 @@ public class StartAnimationScript : MonoBehaviour
     public static UnityEvent StartingAnimationEnded = new UnityEvent();
 
     float Duration = 0.4f;
+
+    [SerializeField] GameObject StartObject;
+    [SerializeField] SpriteRenderer Player;
     // Start is called before the first frame update
     void Start()
     {
         sequence = DOTween.Sequence();
 
+        StartObject.SetActive(false);
+        Player.enabled = false;
         transform.localScale = new Vector3 (MaxScale, MaxScale, 1);
+
+        sequence.AppendInterval(2f);
+        sequence.Append(DOVirtual.DelayedCall(0.3f, () => {
+            StartObject.SetActive(true);
+            Player.enabled = true;
+        }));
 
         sequence.Append(transform.DOScale(1, 1).SetEase(Ease.InCubic));
         sequence.AppendInterval(0.3f);
