@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1136689195059272738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5209667079311114169}
+  - component: {fileID: 4432482680691059808}
+  m_Layer: 0
+  m_Name: PauseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5209667079311114169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136689195059272738}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5851238327512913403}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4432482680691059808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136689195059272738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c9c96ea251b2e48ba3712c15c20a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PausePanel: {fileID: 1746570493920256399}
 --- !u!1 &3592465476867661226
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +177,7 @@ Transform:
   - {fileID: 5851238327025013110}
   - {fileID: 5851238326811226570}
   - {fileID: 5851238326019138133}
+  - {fileID: 5209667079311114169}
   m_Father: {fileID: 234718858381330892}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -211,7 +257,7 @@ PrefabInstance:
     - target: {fileID: 6597792617405072894, guid: 184ea31d9deaa594c9cec474b107974b, type: 3}
       propertyPath: EndPanel
       value: 
-      objectReference: {fileID: 8767224679207263692}
+      objectReference: {fileID: 8426800094624844981}
     - target: {fileID: 6597792617405072894, guid: 184ea31d9deaa594c9cec474b107974b, type: 3}
       propertyPath: MoveText
       value: 
@@ -296,7 +342,39 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2160870743846346066, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645663241928337891, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645663241928337891, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4432482680691059808}
+    - target: {fileID: 2645663241928337891, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetPause
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645663241928337891, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630619969964867244, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630619969964867244, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4432482680691059808}
+    - target: {fileID: 3630619969964867244, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetPause
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630619969964867244, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3847272939839758245, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: m_Name
@@ -390,20 +468,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5201290584010000172, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6577416642795187903, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6577416642795187903, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 28.6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+--- !u!1 &1746570493920256399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8965141317707014417, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+  m_PrefabInstance: {fileID: 7230392979243991198}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4654234220715064917 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2648307098821148363, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
@@ -464,11 +535,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8767224679207263692 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2160870743846346066, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+--- !u!114 &8426800094624844981 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1199512290903624747, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
   m_PrefabInstance: {fileID: 7230392979243991198}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2464ffa9de017e428a53f8eb07d21f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8831208311589164029 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2222883965020066659, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}

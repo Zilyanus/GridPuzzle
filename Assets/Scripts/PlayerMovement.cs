@@ -38,10 +38,26 @@ public class PlayerMovement : MonoBehaviour
 
     bool isStartAnimationEnded;
 
+    bool CantMove;
+    bool isPaused;
+    bool isGameFinished;
+
     private void Awake()
     {
         InputActions = new PlayerInputs();
         InputActions.Player.Enable();
+    }
+
+    private void OnEnable()
+    {
+        GameManager.OnGameFinished.AddListener(OnGameFinished);
+        PauseManager.OnPausedChanged.AddListener(OnPausedChange);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameFinished.RemoveListener(OnGameFinished);
+        PauseManager.OnPausedChanged.RemoveListener(OnPausedChange);
     }
 
     private void Start()
@@ -73,17 +89,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 Movement = isStartAnimationEnded ? InputActions.Player.Movement.ReadValue<Vector2>() : Vector2.zero;
+        CantMove = isPaused || isGameFinished;
 
-        if (Movement.x < 0)
-        {
-            transform.localScale = new Vector3(-0.9f, 0.9f,1);
-        }
-        else if (Movement.x > 0)
-        {
-            transform.localScale = new Vector3(0.9f, 0.9f, 1);
-        }
-        else
+        Vector2 Movement = (isStartAnimationEnded && !CantMove) ? InputActions.Player.Movement.ReadValue<Vector2>() : Vector2.zero;
+
+        if (Movement.x == 0)
         {
             animator.SetFloat("X", 0);
         }
@@ -192,5 +202,15 @@ public class PlayerMovement : MonoBehaviour
     private float EvalSpeed(float presseDuratıon)
     {
         return Speed / Mathf.Clamp(pressedTımeSpeedCurve.Evaluate(presseDuratıon), 1f, 15f);
+    }
+
+    void OnPausedChange(bool value)
+    {
+        isPaused = value;
+    }
+
+    void OnGameFinished()
+    {
+        isGameFinished = true;
     }
 }

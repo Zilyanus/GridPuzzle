@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] float TotalMoveCount;
     float MoveCount;
 
-    [SerializeField] GameObject EndPanel;
+    [SerializeField] EndPanelScript EndPanel;
+
+    public static UnityEvent OnGameFinished = new UnityEvent();
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +60,12 @@ public class GameManager : MonoBehaviour
     void OnPlayerMoved()
     {
         MoveCount++;
+
+        if (MoveCount > TotalMoveCount)
+        {
+            EndPanel.EndLevel(0);
+            OnGameFinished.Invoke();
+        }
     }
 
     void CollectableSpawned()
@@ -77,7 +85,8 @@ public class GameManager : MonoBehaviour
 
     void EndTheGame()
     {
-        EndPanel.SetActive(true);
+        OnGameFinished.Invoke();
+        EndPanel.EndLevel(3);
         Debug.Log("Game Ended");
     }
 }
