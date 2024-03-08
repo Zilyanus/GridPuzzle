@@ -21,31 +21,31 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: -281243506, guid: f9abee8a20c8a87458a08fc1d051df8f, type: 3}
-    - time: 0.16666667
+    - time: 0.083333336
       value: {fileID: 21300000, guid: c31b2636d7ff5b74f8d4c8400587ac37, type: 3}
-    - time: 0.33333334
+    - time: 0.16666667
       value: {fileID: 21300000, guid: 1817c7168659639448e0994c3331f821, type: 3}
-    - time: 0.5
+    - time: 0.25
       value: {fileID: 21300000, guid: c541a251abcb42549a4a8d793fb1d64d, type: 3}
-    - time: 0.6666667
+    - time: 0.33333334
       value: {fileID: 21300000, guid: bd28261286427a04baf9faca12364f0b, type: 3}
-    - time: 0.8333333
+    - time: 0.41666666
       value: {fileID: 21300000, guid: 36eb7253c5e2372469ba9d13be9d5920, type: 3}
-    - time: 1
+    - time: 0.5
       value: {fileID: 21300000, guid: eac0d527785436245bff38b86c82413f, type: 3}
-    - time: 1.1666666
+    - time: 0.5833333
       value: {fileID: 21300000, guid: 76f586dd1f23e6645a3a4fa15ec2cff0, type: 3}
-    - time: 1.3333334
+    - time: 0.6666667
       value: {fileID: 21300000, guid: b32e69746a638e946b4423bab5371ecb, type: 3}
-    - time: 1.5
+    - time: 0.75
       value: {fileID: 21300000, guid: da62f3a959eb1b44f9bbf6b15c95aa03, type: 3}
-    - time: 1.6666666
+    - time: 0.8333333
       value: {fileID: -281243506, guid: f9abee8a20c8a87458a08fc1d051df8f, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 6
+  m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -76,7 +76,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.8333333
+    m_StopTime: 0.9166666
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -96,14 +96,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.33333334
+  - time: 0.16666667
     functionName: StartMoving
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1666666
+  - time: 0.5833333
     functionName: EndMoving
     data: 
     objectReferenceParameter: {fileID: 0}

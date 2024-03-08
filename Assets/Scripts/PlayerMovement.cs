@@ -93,7 +93,15 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 Movement = (isStartAnimationEnded && !CantMove) ? InputActions.Player.Movement.ReadValue<Vector2>() : Vector2.zero;
 
-        if (Movement.x == 0)
+        if (Movement.x < 0)
+        {
+            transform.localScale = new Vector3(-1f, 0.9f, 1);
+        }
+        else if (Movement.x > 0)
+        {
+            transform.localScale = new Vector3(1f, 0.9f, 1);
+        }
+        else
         {
             animator.SetFloat("X", 0);
         }
