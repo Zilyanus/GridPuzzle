@@ -23,7 +23,7 @@ public class EndPanelScript : MonoBehaviour
         
     }
 
-    public void EndLevel(int score)
+    public void EndLevel(int score, int LevelCount)
     {
         if (score == 0)
         {
@@ -33,6 +33,12 @@ public class EndPanelScript : MonoBehaviour
         {
             WinLosePanels[1].SetActive(true);
         }
+
+        if (ES3.Load("Level " + LevelCount,-1) < score)
+            ES3.Save("Level " + LevelCount, score);
+
+        if (ES3.Load("LastLevel", 0) < LevelCount)
+            ES3.Save("LastLevel", LevelCount);
 
         Panel.SetActive(true);
         Panel.GetComponent<RectTransform>().localScale = Vector3.zero;

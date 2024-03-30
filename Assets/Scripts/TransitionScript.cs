@@ -19,6 +19,11 @@ public class TransitionScript : MonoBehaviour
         
     }
 
+    public void LoadLastLevel()
+    {
+
+    }
+
     public void LoadLevel(int index)
     {
         SceneManager.LoadScene(index);

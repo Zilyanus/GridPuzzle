@@ -31,9 +31,12 @@ public class GameManager : MonoBehaviour
     public static UnityEvent OnGameFinished = new UnityEvent();
 
     [SerializeField] StarSliderScript StarSlider;
+
+    int LevelCount;
     // Start is called before the first frame update
     void Start()
     {
+        LevelCount = SceneManager.GetActiveScene().buildIndex + 1;
         LevelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
         StartLevelText.text = "-" + LevelText.text + "-";
 
@@ -78,7 +81,7 @@ public class GameManager : MonoBehaviour
 
         if (MoveCount > MoveCountFor0Star)
         {
-            EndPanel.EndLevel(0);
+            EndPanel.EndLevel(0, LevelCount);
             OnGameFinished.Invoke();
             EndText.text = "-You Lose-";
         }
@@ -102,7 +105,7 @@ public class GameManager : MonoBehaviour
     void EndTheGame()
     {
         OnGameFinished.Invoke();
-        EndPanel.EndLevel(3);
+        EndPanel.EndLevel(3 , LevelCount);
         Debug.Log("Game Ended");
     }
 }
