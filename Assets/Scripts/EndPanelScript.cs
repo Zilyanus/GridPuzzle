@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class EndPanelScript : MonoBehaviour
 {
@@ -44,22 +45,28 @@ public class EndPanelScript : MonoBehaviour
         sequence.OnComplete(() =>
         {
             sequence.Kill();
-            for (int i = 0; i < score; i++)
-            {
-                Starts[i].SetActive(true);
-                Vector3 Scale = Starts[i].GetComponent<RectTransform>().localScale;
-                Starts[i].GetComponent<RectTransform>().localScale = Vector3.zero;
-
-                Sequence sequence1 = DOTween.Sequence();
-
-                sequence1.Append(Starts[i].GetComponent<RectTransform>().DOScale(Scale, 0.5f).SetEase(Ease.OutBack));
-                sequence1.Join(Starts[i].GetComponent<RectTransform>().DOPunchRotation(Vector3.forward * 15, 0.5f).SetEase(Ease.OutBack));
-
-                sequence1.OnComplete(() =>
-                {
-                    sequence1.Kill();
-                });
-            }
+            StartCoroutine(StarCome(score));
         });
+    }
+
+    IEnumerator StarCome(int score)
+    {
+        for (int i = 0; i < score; i++)
+        {
+            Starts[i].SetActive(true);
+            Vector3 Scale = Starts[i].GetComponent<RectTransform>().localScale;
+            Starts[i].GetComponent<RectTransform>().localScale = Vector3.zero;
+
+            Sequence sequence1 = DOTween.Sequence();
+
+            sequence1.Append(Starts[i].GetComponent<RectTransform>().DOScale(Scale, 0.5f).SetEase(Ease.OutBack));
+            sequence1.Join(Starts[i].GetComponent<RectTransform>().DOPunchRotation(Vector3.forward * 15, 0.5f).SetEase(Ease.OutBack));
+
+            sequence1.OnComplete(() =>
+            {
+                sequence1.Kill();
+            });
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 }

@@ -844,6 +844,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1620397286156175859, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: MaxValue
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620397286156175859, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: MovedCount
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620397286156175859, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: CurrentValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620397286156175859, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: TotalMoveCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620397286156175859, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: MoveCountFor1Star
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620397286156175859, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: MoveCountFor2Star
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881104611761688905, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2478230003294751971, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.14285715
+      objectReference: {fileID: 0}
+    - target: {fileID: 2478230003294751971, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3592465476867661226, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
       propertyPath: m_Name
       value: Essentials
@@ -851,6 +887,10 @@ PrefabInstance:
     - target: {fileID: 5851238327025013111, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
       propertyPath: TotalMoveCount
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8583769089175538719, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0148180264fb24589501a16a01df2d, type: 3}

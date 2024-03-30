@@ -18,17 +18,30 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI StartCollectableText;
     [SerializeField] TextMeshProUGUI StartMoveText;
 
+    [SerializeField] TextMeshProUGUI EndText;
+
     [SerializeField] float TotalMoveCount;
+    [SerializeField] float MoveCountFor2Star;
+    [SerializeField] float MoveCountFor1Star;
+    [SerializeField] float MoveCountFor0Star;
     float MoveCount;
 
     [SerializeField] EndPanelScript EndPanel;
 
     public static UnityEvent OnGameFinished = new UnityEvent();
+
+    [SerializeField] StarSliderScript StarSlider;
     // Start is called before the first frame update
     void Start()
     {
         LevelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
         StartLevelText.text = "-" + LevelText.text + "-";
+
+        MoveCountFor2Star = TotalMoveCount + (int)(TotalMoveCount * 25/100);
+        MoveCountFor1Star = TotalMoveCount + (int)(TotalMoveCount * 50/100);
+        MoveCountFor0Star = TotalMoveCount + (int)(TotalMoveCount * 75 / 100);
+
+        StarSlider.GetStarValues(TotalMoveCount, MoveCountFor2Star, MoveCountFor1Star, MoveCountFor0Star);
     }
 
     private void OnEnable()
@@ -51,20 +64,23 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         CollectableText.text = CollectedCount + "/" + CollectableCount;
-        MoveText.text = (TotalMoveCount - MoveCount > 0 ? TotalMoveCount - MoveCount : 0).ToString();
+        MoveText.text = (MoveCountFor0Star - MoveCount > 0 ? MoveCountFor0Star - MoveCount : 0).ToString();
 
         StartCollectableText.text = CollectableCount.ToString();
         StartMoveText.text = TotalMoveCount.ToString();
+
+        StarSlider.MovedCount = MoveCount;
     }
 
     void OnPlayerMoved()
     {
         MoveCount++;
 
-        if (MoveCount > TotalMoveCount)
+        if (MoveCount > MoveCountFor0Star)
         {
             EndPanel.EndLevel(0);
             OnGameFinished.Invoke();
+            EndText.text = "-You Lose-";
         }
     }
 
