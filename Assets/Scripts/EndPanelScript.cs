@@ -37,8 +37,8 @@ public class EndPanelScript : MonoBehaviour
         if (ES3.Load("Level " + LevelCount,-1) < score)
             ES3.Save("Level " + LevelCount, score);
 
-        if (ES3.Load("LastLevel", 0) < LevelCount)
-            ES3.Save("LastLevel", LevelCount);
+        if (ES3.Load("LastLevel", 0) < LevelCount + 1)
+            ES3.Save("LastLevel", LevelCount +1 );
 
         Panel.SetActive(true);
         Panel.GetComponent<RectTransform>().localScale = Vector3.zero;

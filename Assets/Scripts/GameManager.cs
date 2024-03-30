@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LevelCount = SceneManager.GetActiveScene().buildIndex + 1;
-        LevelText.text = "Level " + SceneManager.GetActiveScene().buildIndex;
+        LevelCount = SceneManager.GetActiveScene().buildIndex -2;
+        LevelText.text = "Level " + (SceneManager.GetActiveScene().buildIndex -1);
         StartLevelText.text = "-" + LevelText.text + "-";
 
         MoveCountFor2Star = TotalMoveCount + (int)(TotalMoveCount * 25/100);
