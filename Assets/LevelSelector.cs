@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+[SelectionBase]
 public class LevelSelector : MonoBehaviour
 {
     [SerializeField] int StarRequired = 0;

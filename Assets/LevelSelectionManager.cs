@@ -8,6 +8,7 @@ public class LevelSelectionManager : MonoBehaviour
 {
     LevelSelector[] levelSelectors;
     public int TotalStar = 0;
+    [SerializeField] Transform LastCamPos;
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,6 +35,8 @@ public class LevelSelectionManager : MonoBehaviour
         {
             levelSelectors[i].GetData(i, i + 1 < levelSelectors.Length ? levelSelectors[i + 1].transform.position : levelSelectors[i].transform.position);
         }
+
+        LastCamPos.position = levelSelectors[levelSelectors.Length -1].transform.position + new Vector3(10,0,0);
     }
 
     public Vector3 GetPos(int level)

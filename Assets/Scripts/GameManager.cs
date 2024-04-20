@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
     void EndTheGame()
     {
         OnGameFinished.Invoke();
-        EndPanel.EndLevel(3 , LevelCount);
+        EndPanel.EndLevel(StarSlider.GetEndValues(), LevelCount);
         Debug.Log("Game Ended");
     }
 }

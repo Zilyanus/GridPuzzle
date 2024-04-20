@@ -3710,6 +3710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TotalStar: 0
+  LastCamPos: {fileID: 491847717}
 --- !u!1 &1813429848
 GameObject:
   m_ObjectHideFlags: 0
