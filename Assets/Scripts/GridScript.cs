@@ -19,15 +19,29 @@ public class GridScript : SurroundControl
     {
 
     }
-
-    public override int Control(Vector2 vector2)
+    public override void ControlSurround()
     {
+        SetSurroundAtIndex(0, Control(transform.up, 0));
+        SetSurroundAtIndex(1, Control(-transform.up, 1));
+        SetSurroundAtIndex(2, Control(transform.right, 2));
+        SetSurroundAtIndex(3, Control(-transform.right, 3));
+    }
+
+    public override int Control(Vector2 vector2, int index)
+    {
+        SetPuzzleGridAtIndex(index, null);
         Vector2 Pos = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(Pos + vector2 * 4 / 10, vector2, 0.5f, layerMask);
         if (hit && hit.collider.gameObject.layer == 3 && hit.collider.gameObject != gameObject)
         {
             OnCombineGrids.Invoke(gameObject, hit.collider.gameObject);
             return 1;
+        }
+        else if (hit && hit.collider.gameObject.layer == 11)
+        {
+            hit.collider.gameObject.GetComponent<PuzzleGrid>().MainObject = transform;
+            SetPuzzleGridAtIndex(index, hit.collider.gameObject.GetComponent<PuzzleGrid>());
+            return 4;
         }
         else if (hit && hit.collider.gameObject.layer == 7)
         {
@@ -43,13 +57,6 @@ public class GridScript : SurroundControl
         }
     }
 
-    public override void ControlSurround()
-    {
-        SetSurroundAtIndex(0, Control(transform.up));
-        SetSurroundAtIndex(1, Control(-transform.up));
-        SetSurroundAtIndex(2, Control(transform.right));
-        SetSurroundAtIndex(3, Control(-transform.right));
-    }
 
     public GridParent TransformToGridParent()
     {

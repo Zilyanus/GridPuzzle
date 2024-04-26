@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotaterGrid : MonoBehaviour
+public class RotaterGrid : PuzzleGrid
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void CreateCommand()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Command = new RotateCommand(MainObject);
     }
 }

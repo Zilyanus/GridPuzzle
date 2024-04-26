@@ -31,23 +31,31 @@ public class GridParent : SurroundControl
 
     public override void ControlSurround()
     {
-        SetSurroundAtIndex(0, Control(new Vector2(0, 0)));
-        SetSurroundAtIndex(1, Control(new Vector2(1, 0)));
-        SetSurroundAtIndex(2, Control(new Vector2(2, 0)));
-        SetSurroundAtIndex(3, Control(new Vector2(3, 0)));
+        SetSurroundAtIndex(0, Control(new Vector2(0, 0),0));
+        SetSurroundAtIndex(1, Control(new Vector2(1, 0),1));
+        SetSurroundAtIndex(2, Control(new Vector2(2, 0),2));
+        SetSurroundAtIndex(3, Control(new Vector2(3, 0),3));
+
+        Debug.Log(Control(new Vector2(3, 0), 3));
     }
 
-    public override int Control(Vector2 vector2)
+    public override int Control(Vector2 vector2, int index)
     {
+        SetPuzzleGridAtIndex(index, null);
         int SurroundInt = 0;
         for (int i = 0; i < Grids.Count; i++)
         {
             Grids[i].ControlSurround();
-            if (Grids[i].GetSurroundAtIndex((int)vector2.x) == 2)
+            if (Grids[i].GetSurroundAtIndex(index) == 4)
+            {
+                SetPuzzleGridAtIndex(index,Grids[i].GetPuzzleGridAtIndex(index)); 
+                SurroundInt = 4;
+            }
+            else if (Grids[i].GetSurroundAtIndex(index) == 2)
             {
                 SurroundInt = 2;
-            }
-            else if (Grids[i].GetSurroundAtIndex((int)vector2.x) == -1 && SurroundInt != 2)
+            }   
+            else if (Grids[i].GetSurroundAtIndex(index) == -1 && SurroundInt != 2)
             {
                 SurroundInt = -1;
             }

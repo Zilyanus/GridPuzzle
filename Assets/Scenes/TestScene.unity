@@ -546,6 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb3640ba6f1a3a47bfc5646509940a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainObject: {fileID: 0}
 --- !u!61 &493574198
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3632,6 +3633,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8329185752008863578, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 3784
+      objectReference: {fileID: 0}
     - target: {fileID: 8329185752008863579, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     GridParent gridParent;
 
     Animator animator;
-    ICommand LastCommand;
+    MainCommand LastCommand;
 
     private IDictionary<Vector3, float> movementTimeSpeedMap = new Dictionary<Vector3, float>
         {
@@ -32,15 +33,21 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] LayerMask GridMask;
 
-    MoveInvoker moveInvoker;
+    //MoveInvoker moveInvoker;
 
     public static event Action OnMoved;
+    public static event Action OnUndoPressed;
+    public static event Action OnRedoPressed;
 
     bool isStartAnimationEnded;
 
     bool CantMove;
     bool isPaused;
     bool isGameFinished;
+
+    public static event Action<MainCommand> MoveCommandAction;
+
+    List<PuzzleGrid> puzzleGrids = new List<PuzzleGrid>();
 
     private void Awake()
     {
@@ -63,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        moveInvoker = new MoveInvoker();
+        //moveInvoker = new MoveInvoker();
 
         playerSurrounding = GetComponent<PlayerSurrounding>();
 
@@ -114,76 +121,28 @@ public class PlayerMovement : MonoBehaviour
 
         if (Movement.x > 0)
         {
-            //if (playerSurrounding.GetSurroundAtIndex(2) == 1 && !DOTween.IsTweening(gridParent.transform) && !DOTween.IsTweening(transform))
-            //{
-            //    animator.SetFloat("X", Movement.x);
-            //    ICommand moveCommand = new MoveCommand(this, Vector3.right, transform);
-            //    LastCommand = moveCommand;
-            //}
-            //if (playerSurrounding.GetSurroundAtIndex(2) == 0 && gridParent.GetSurroundAtIndex(2) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
-            //{
-            //    animator.SetFloat("X", Movement.x);
-            //    ICommand moveCommand = new MoveCommand(this, Vector3.right, gridParent.transform);
-            //    LastCommand = moveCommand;
-            //}
             MoveControl(2, "X", Movement.x, Vector3.right);
         }
         else if (Movement.x < 0)
         {
-            //if (playerSurrounding.GetSurroundAtIndex(3) == 1 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
-            //{
-            //    animator.SetFloat("X", Movement.x);
-            //    ICommand moveCommand = new MoveCommand(this, Vector3.left, transform);
-            //    LastCommand = moveCommand;
-            //}
-            //if (playerSurrounding.GetSurroundAtIndex(3) == 0 && gridParent.GetSurroundAtIndex(3) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
-            //{
-            //    animator.SetFloat("X", Movement.x);
-            //    ICommand moveCommand = new MoveCommand(this, Vector3.left, gridParent.transform);
-            //    LastCommand = moveCommand;
-            //}
             MoveControl(3, "X", Movement.x, Vector3.left);
         }
         else if (Movement.y > 0)
         {
-            //if (playerSurrounding.GetSurroundAtIndex(0) == 1 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
-            //{
-            //    animator.SetFloat("Y", Movement.y);
-            //    ICommand moveCommand = new MoveCommand(this, Vector3.up, transform);
-            //    LastCommand = moveCommand;
-            //}
-            //if (playerSurrounding.GetSurroundAtIndex(0) == 0 && gridParent.GetSurroundAtIndex(0) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
-            //{
-            //    animator.SetFloat("Y", Movement.y);
-            //    ICommand moveCommand = new MoveCommand(this, Vector3.up, gridParent.transform);
-            //    LastCommand = moveCommand;
-            //}
             MoveControl(0, "Y", Movement.y, Vector3.up);
         }
         else if (Movement.y < 0)
         {
-            //if (playerSurrounding.GetSurroundAtIndex(1) == 1 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
-            //{
-            //    animator.SetFloat("Y", Movement.y);
-            //    ICommand moveCommand = new MoveCommand(this, Vector3.down, transform);
-            //    LastCommand = moveCommand;
-            //}
-            //if (playerSurrounding.GetSurroundAtIndex(1) == 0 && gridParent.GetSurroundAtIndex(1) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
-            //{
-            //    animator.SetFloat("Y", Movement.y);
-            //    ICommand moveCommand = new MoveCommand(this, Vector3.down, gridParent.transform);
-            //    LastCommand = moveCommand;
-            //}
             MoveControl(1, "Y", Movement.y, Vector3.down);
         }
 
         if (InputActions.Player.UndoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
         {
-            moveInvoker.UndoCommand();
+            OnUndoPressed.Invoke();
         }
         else if (InputActions.Player.RedoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
         {
-            moveInvoker.RedoCommand();
+            OnRedoPressed.Invoke();
         }
 
         if (InputActions.Player.RestartA.ReadValue<float>() != 0)
@@ -192,17 +151,38 @@ public class PlayerMovement : MonoBehaviour
 
     void MoveControl(int index,string Key, float AnimatorValue, Vector3 Dir)
     {
+        MainCommand _mainCommand = new MainCommand();
+        puzzleGrids.Clear();
+
         if (playerSurrounding.GetSurroundAtIndex(index) == 1 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
         {
             animator.SetFloat(Key, AnimatorValue);
             ICommand moveCommand = new MoveCommand(this, Dir, transform);
-            LastCommand = moveCommand;
+            _mainCommand.AddCommand(moveCommand);
+            LastCommand = _mainCommand;
         }
         if (playerSurrounding.GetSurroundAtIndex(index) == 0 && gridParent.GetSurroundAtIndex(index) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
         {
             animator.SetFloat(Key, AnimatorValue);
             ICommand moveCommand = new MoveCommand(this, Dir, gridParent.transform);
-            LastCommand = moveCommand;
+            _mainCommand.AddCommand(moveCommand);
+            LastCommand = _mainCommand;
+        }
+        if ((playerSurrounding.GetSurroundAtIndex(index) == 0 || playerSurrounding.GetSurroundAtIndex(index) == 4) && gridParent.GetSurroundAtIndex(index) == 4 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+        {
+            animator.SetFloat(Key, AnimatorValue);
+            ICommand moveCommand = new MoveCommand(this, Dir, gridParent.transform);
+            _mainCommand.AddCommand(moveCommand);
+            LastCommand = _mainCommand;
+
+            PuzzleGrid puzzleGrid = gridParent.GetPuzzleGridAtIndex(index);
+
+            puzzleGrids.Add(puzzleGrid);
+            puzzleGrid.CreateCommand();
+        }
+        else
+        {
+            Debug.Log((playerSurrounding.GetSurroundAtIndex(index) == 0 || playerSurrounding.GetSurroundAtIndex(index) == 4));
         }
     }
     
@@ -215,8 +195,14 @@ public class PlayerMovement : MonoBehaviour
             //transform.DOMove(transform.position + dir, EvalSpeed(movementTimeSpeedMap[dir])).OnComplete(() => { transform.GetComponent<SurroundControl>().ControlSurround(); });
             transform.DOMove(transform.position + dir, 0.332f).SetEase(Ease.InOutCubic).OnComplete(() => 
             { 
-                transform.GetComponent<SurroundControl>().ControlSurround(); 
-
+                transform.GetComponent<SurroundControl>().ControlSurround();
+                if (puzzleGrids.Count > 0)
+                {
+                    for (int i = 0; i < puzzleGrids.Count; i++)
+                    {
+                        puzzleGrids[i].ExecuteGrid();
+                    }
+                }                 
             });
             movementTimeSpeedMap[dir] = 0;
         }
@@ -226,7 +212,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (LastCommand != null)
         {
-            moveInvoker.AddCommand(LastCommand);
+            if (MoveCommandAction != null)
+                MoveCommandAction.Invoke(LastCommand);
+            //moveInvoker.AddCommand(LastCommand);
             LastCommand = null;
         }
     }
