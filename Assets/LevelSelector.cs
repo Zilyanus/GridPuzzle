@@ -45,6 +45,7 @@ public class LevelSelector : MonoBehaviour
         StarValue = ES3.Load("Level " + LevelIndex, -1);
         LevelText.text = (LevelIndex + 1).ToString();
         isLocked = ES3.Load("LastLevel",0) >= LevelIndex ? false : true;
+        Debug.Log(ES3.Load("LastLevel", 0));
 
         if (ES3.Load("LastLevel", 0) == LevelIndex)
         {
