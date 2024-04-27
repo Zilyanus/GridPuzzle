@@ -16,7 +16,7 @@ public class LevelSelectionManager : MonoBehaviour
 
         for (int i = 0; i < ES3.Load("LastLevel", 0); i++)
         {
-            TotalStar += ES3.Load<int>("Level " + i);
+            TotalStar += ES3.Load<int>("Level " + i, -1);
         }
     }
 

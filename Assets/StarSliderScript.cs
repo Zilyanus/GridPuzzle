@@ -60,15 +60,15 @@ public class StarSliderScript : MonoBehaviour
 
     public int GetEndValues()
     {
-        if (CurrentValue < MoveCounts[0])
+        if (CurrentValue <= MoveCounts[0])
         {
             return 3;
         }
-        else if (CurrentValue > MoveCounts[0])
+        else if (CurrentValue <= MoveCounts[1])
         {
             return 2;
         }
-        else if (CurrentValue > MoveCounts[1])
+        else if (CurrentValue <= MoveCounts[2])
         {
             return 1;
         }
