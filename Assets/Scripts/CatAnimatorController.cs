@@ -26,6 +26,6 @@ public class CatAnimatorController : MonoBehaviour
 
     public void EndMoving()
     {
-        Debug.Log(Time.time - TimeStart);
+        //Debug.Log(Time.time - TimeStart);
     }
 }

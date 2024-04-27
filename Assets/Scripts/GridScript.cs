@@ -7,7 +7,10 @@ using UnityEngine.Events;
 
 public class GridScript : SurroundControl
 {
-    public static UnityEvent<GameObject,GameObject> OnCombineGrids = new UnityEvent<GameObject,GameObject>();     
+    public static UnityEvent<GameObject,GameObject> OnCombineGrids = new UnityEvent<GameObject,GameObject>();
+
+    [SerializeField] List<float> DebugFloats = new List<float>();
+    [SerializeField] List<Vector2> DebugFloats2 = new List<Vector2>();
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +24,15 @@ public class GridScript : SurroundControl
     }
     public override void ControlSurround()
     {
-        SetSurroundAtIndex(0, Control(transform.up, 0));
-        SetSurroundAtIndex(1, Control(-transform.up, 1));
-        SetSurroundAtIndex(2, Control(transform.right, 2));
-        SetSurroundAtIndex(3, Control(-transform.right, 3));
+        SetSurroundAtIndex(0, Control(Vector2.up, 0));
+        SetSurroundAtIndex(1, Control(-Vector2.up, 1));
+        SetSurroundAtIndex(2, Control(Vector2.right, 2));
+        SetSurroundAtIndex(3, Control(-Vector2.right, 3));
+
+        DebugFloats[0] = GetSurroundAtIndex(0);
+        DebugFloats[1] = GetSurroundAtIndex(1);
+        DebugFloats[2] = GetSurroundAtIndex(2);
+        DebugFloats[3] = GetSurroundAtIndex(3);
     }
 
     public override int Control(Vector2 vector2, int index)
@@ -32,6 +40,8 @@ public class GridScript : SurroundControl
         SetPuzzleGridAtIndex(index, null);
         Vector2 Pos = transform.position;
         RaycastHit2D hit = Physics2D.Raycast(Pos + vector2 * 4 / 10, vector2, 0.5f, layerMask);
+
+        DebugFloats2[index] = Pos + vector2 * 4 / 10;
         if (hit && hit.collider.gameObject.layer == 3 && hit.collider.gameObject != gameObject)
         {
             OnCombineGrids.Invoke(gameObject, hit.collider.gameObject);
@@ -41,6 +51,7 @@ public class GridScript : SurroundControl
         {
             hit.collider.gameObject.GetComponent<PuzzleGrid>().MainObject = transform;
             SetPuzzleGridAtIndex(index, hit.collider.gameObject.GetComponent<PuzzleGrid>());
+            //Debug.Log("HEY " + GetPuzzleGridAtIndex(index));
             return 4;
         }
         else if (hit && hit.collider.gameObject.layer == 7)

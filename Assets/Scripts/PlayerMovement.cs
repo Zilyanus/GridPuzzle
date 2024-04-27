@@ -161,15 +161,16 @@ public class PlayerMovement : MonoBehaviour
             _mainCommand.AddCommand(moveCommand);
             LastCommand = _mainCommand;
         }
-        if (playerSurrounding.GetSurroundAtIndex(index) == 0 && gridParent.GetSurroundAtIndex(index) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+        else if (playerSurrounding.GetSurroundAtIndex(index) == 0 && gridParent.GetSurroundAtIndex(index) == 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
         {
             animator.SetFloat(Key, AnimatorValue);
             ICommand moveCommand = new MoveCommand(this, Dir, gridParent.transform);
             _mainCommand.AddCommand(moveCommand);
             LastCommand = _mainCommand;
         }
-        if ((playerSurrounding.GetSurroundAtIndex(index) == 0 || playerSurrounding.GetSurroundAtIndex(index) == 4) && gridParent.GetSurroundAtIndex(index) == 4 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+        else if ((playerSurrounding.GetSurroundAtIndex(index) == 0 || playerSurrounding.GetSurroundAtIndex(index) == 4) && gridParent.GetSurroundAtIndex(index) == 4 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
         {
+            Debug.Log(index);
             animator.SetFloat(Key, AnimatorValue);
             ICommand moveCommand = new MoveCommand(this, Dir, gridParent.transform);
             _mainCommand.AddCommand(moveCommand);
@@ -182,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log((playerSurrounding.GetSurroundAtIndex(index) == 0 || playerSurrounding.GetSurroundAtIndex(index) == 4));
+            Debug.Log(playerSurrounding.GetSurroundAtIndex(index) + " " + gridParent.GetSurroundAtIndex(index));
         }
     }
     
@@ -194,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
             OnMoved.Invoke();
             //transform.DOMove(transform.position + dir, EvalSpeed(movementTimeSpeedMap[dir])).OnComplete(() => { transform.GetComponent<SurroundControl>().ControlSurround(); });
             transform.DOMove(transform.position + dir, 0.332f).SetEase(Ease.InOutCubic).OnComplete(() => 
-            { 
+            {                
                 transform.GetComponent<SurroundControl>().ControlSurround();
                 if (puzzleGrids.Count > 0)
                 {
@@ -202,6 +203,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         puzzleGrids[i].ExecuteGrid();
                     }
+                        puzzleGrids.Clear();
                 }                 
             });
             movementTimeSpeedMap[dir] = 0;

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ using UnityEngine;
 public class RotateCommand : ICommand
 {
     Transform ObjectToRotate;
+
+    public static event Action<float> OnGridRotate;
+
     public RotateCommand(Transform RotatingObject)
     {
         ObjectToRotate = RotatingObject;
@@ -13,17 +17,21 @@ public class RotateCommand : ICommand
 
     public void Execute()
     {
-        Transform OldParent = ObjectToRotate.parent;
+        Transform OldParent = ObjectToRotate.parent.parent;
 
         GameObject Pivot = new GameObject();
         Pivot.transform.position = ObjectToRotate.transform.position;
 
-        ObjectToRotate.parent = Pivot.transform;
+        ObjectToRotate.parent.parent = Pivot.transform;
 
-        Pivot.transform.DORotate(Vector3.forward * 90 ,0.3f);
-        ObjectToRotate.parent = OldParent;
+        OnGridRotate.Invoke(90);
 
-        Object.Destroy(Pivot);
+        Pivot.transform.DORotate(Vector3.forward * 90, 0.3f).OnComplete(() =>
+        {
+            ObjectToRotate.parent.parent = OldParent;
+
+            UnityEngine.Object.Destroy(Pivot);
+        });
     }
 
     public bool Undo()

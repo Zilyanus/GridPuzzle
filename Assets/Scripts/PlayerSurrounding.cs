@@ -37,10 +37,10 @@ public class PlayerSurrounding : SurroundControl
 
     public override void ControlSurround()
     {
-        SetSurroundAtIndex(0, Control(transform.up,0));
-        SetSurroundAtIndex(1, Control(-transform.up,1));
-        SetSurroundAtIndex(2, Control(transform.right,2));
-        SetSurroundAtIndex(3, Control(-transform.right,3));
+        SetSurroundAtIndex(0, Control(Vector2.up,0));
+        SetSurroundAtIndex(1, Control(-Vector2.up,1));
+        SetSurroundAtIndex(2, Control(Vector2.right,2));
+        SetSurroundAtIndex(3, Control(-Vector2.right,3));
     }
 
 

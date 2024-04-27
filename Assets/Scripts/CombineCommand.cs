@@ -15,8 +15,9 @@ public class CombineCommand : ICommand
 
     public void Execute()
     {
+        //Refactor Edilecek
         GridParent gridParent = null;
-        if (g1.transform.parent != null && g1.transform.parent != g2.transform.parent)
+        if (g1.transform.rotation != Quaternion.Euler(0,0,0) && g1.transform.parent != null && g1.transform.parent != g2.transform.parent)
         {
             Transform OldParent = g2.transform.parent;
 
@@ -36,7 +37,47 @@ public class CombineCommand : ICommand
             gridParent = g1.GetComponentInParent<GridParent>();
             gridParent.RegainIndex();
         }
-        else if (g2.transform.parent != null && g1.transform.parent != g2.transform.parent)
+        else if (g2.transform.rotation != Quaternion.Euler(0, 0, 0) && g2.transform.parent != null && g1.transform.parent != g2.transform.parent)
+        {
+            Transform OldParent = g1.transform.parent;
+
+            List<Transform> Childs = new();
+            for (int i = 0; i < OldParent.childCount; i++)
+            {
+                Childs.Add(OldParent.GetChild(i));
+            }
+            for (int i = 0; i < Childs.Count; i++)
+            {
+                Childs[i].parent = g2.transform.parent;
+            }
+
+            if (OldParent != null)
+                Object.Destroy(OldParent.gameObject);
+
+            gridParent = g2.GetComponentInParent<GridParent>();
+            gridParent.RegainIndex();
+        }
+        else if (g1.transform.parent != null && g1.transform.parent != g2.transform.parent)
+        {
+            Transform OldParent = g2.transform.parent;
+
+            List<Transform> Childs = new();
+            for (int i = 0; i < OldParent.childCount; i++)
+            {
+                Childs.Add(OldParent.GetChild(i));
+            }
+            for (int i = 0; i < Childs.Count; i++)
+            {
+                Childs[i].parent = g1.transform.parent;
+            }
+
+            if (OldParent != null)
+                Object.Destroy(OldParent.gameObject);
+
+            gridParent = g1.GetComponentInParent<GridParent>();
+            gridParent.RegainIndex();
+        }
+        if (g2.transform.parent != null && g1.transform.parent != g2.transform.parent)
         {
             Transform OldParent = g1.transform.parent;
 

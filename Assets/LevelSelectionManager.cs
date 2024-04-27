@@ -36,7 +36,7 @@ public class LevelSelectionManager : MonoBehaviour
             levelSelectors[i].GetData(i, i + 1 < levelSelectors.Length ? levelSelectors[i + 1].transform.position : levelSelectors[i].transform.position);
         }
 
-        LastCamPos.position = levelSelectors[levelSelectors.Length -1].transform.position + new Vector3(10,0,0);
+        LastCamPos.position = levelSelectors[levelSelectors.Length -1].transform.position + new Vector3(-2,0,0);
     }
 
     public Vector3 GetPos(int level)

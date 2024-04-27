@@ -128,6 +128,16 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 2760
+  DebugFloats:
+  - 0
+  - 0
+  - 0
+  - 0
+  DebugFloats2:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
 --- !u!61 &3445595353595545367
 BoxCollider2D:
   m_ObjectHideFlags: 0
