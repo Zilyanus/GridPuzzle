@@ -844,10 +844,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 314494747280152821, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
-      propertyPath: m_text
-      value: x1
-      objectReference: {fileID: 0}
     - target: {fileID: 1620397286156175859, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
       propertyPath: MaxValue
       value: 7
@@ -872,14 +868,6 @@ PrefabInstance:
       propertyPath: MoveCountFor2Star
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1651939187579764923, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
-      propertyPath: m_text
-      value: x2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1881104611761688905, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2478230003294751971, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.14285715
@@ -895,10 +883,6 @@ PrefabInstance:
     - target: {fileID: 5851238327025013111, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
       propertyPath: TotalMoveCount
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8583769089175538719, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
