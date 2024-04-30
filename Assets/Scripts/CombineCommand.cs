@@ -77,7 +77,7 @@ public class CombineCommand : ICommand
             gridParent = g1.GetComponentInParent<GridParent>();
             gridParent.RegainIndex();
         }
-        if (g2.transform.parent != null && g1.transform.parent != g2.transform.parent)
+        else if (g2.transform.parent != null && g1.transform.parent != g2.transform.parent)
         {
             Transform OldParent = g1.transform.parent;
 
@@ -105,10 +105,6 @@ public class CombineCommand : ICommand
 
             g1.transform.parent = Parent.transform;
             g2.transform.parent = Parent.transform;
-        }
-        else
-        {
-            return;
         }
 
         if (gridParent != null)

@@ -138,6 +138,7 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
+  DebugObject: {fileID: 2284281626912136963, guid: 7d76dff48b5b747499d6f5fe04fb76d5, type: 3}
 --- !u!61 &3445595353595545367
 BoxCollider2D:
   m_ObjectHideFlags: 0

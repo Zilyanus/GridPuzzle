@@ -12,6 +12,7 @@ public class GridParent : SurroundControl
     public static event Action<GridParent> OnSpawned;
     public int GridParentdIndex;
 
+    [SerializeField] int ChildCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,14 @@ public class GridParent : SurroundControl
     // Update is called once per frame
     void Update()
     {
-       
+        ChildCount = 0;
+        for (int i = 0; i < Grids.Count; i++)
+        {
+            if (Grids[i] != null)
+            {
+                ChildCount++;
+            }
+        }
     }
 
     public override void ControlSurround()
@@ -35,8 +43,6 @@ public class GridParent : SurroundControl
         SetSurroundAtIndex(1, Control(new Vector2(1, 0),1));
         SetSurroundAtIndex(2, Control(new Vector2(2, 0),2));
         SetSurroundAtIndex(3, Control(new Vector2(3, 0),3));
-
-        //Debug.Log(Control(new Vector2(3, 0), 3));
     }
 
     public override int Control(Vector2 vector2, int index)

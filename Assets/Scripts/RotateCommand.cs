@@ -7,12 +7,14 @@ using UnityEngine;
 public class RotateCommand : ICommand
 {
     Transform ObjectToRotate;
+    float RotateValue;
 
     public static event Action<float> OnGridRotate;
 
-    public RotateCommand(Transform RotatingObject)
+    public RotateCommand(Transform RotatingObject, float rotateValue)
     {
         ObjectToRotate = RotatingObject;
+        RotateValue = rotateValue;
     }
 
     public void Execute()
@@ -26,10 +28,10 @@ public class RotateCommand : ICommand
 
         OnGridRotate.Invoke(90);
 
-        Pivot.transform.DORotate(Vector3.forward * 90, 0.3f).OnComplete(() =>
+        Pivot.transform.DORotate(Vector3.forward * RotateValue, 0.3f).OnComplete(() =>
         {
             ObjectToRotate.parent.parent = OldParent;
-
+            ObjectToRotate.GetComponentInParent<GridParent>().ControlSurround();
             UnityEngine.Object.Destroy(Pivot);
         });
     }

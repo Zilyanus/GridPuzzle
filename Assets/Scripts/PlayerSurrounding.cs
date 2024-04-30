@@ -1,10 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerSurrounding : SurroundControl
 {
+    [SerializeField] List<float> DebugFloats = new List<float>();
+
     public override int Control(Vector2 vector2, int index)
     {
         Vector2 Pos = transform.position;
@@ -41,6 +45,11 @@ public class PlayerSurrounding : SurroundControl
         SetSurroundAtIndex(1, Control(-Vector2.up,1));
         SetSurroundAtIndex(2, Control(Vector2.right,2));
         SetSurroundAtIndex(3, Control(-Vector2.right,3));
+
+        for (int i = 0; i < DebugFloats.Count; i++)
+        {
+            DebugFloats[i] = GetSurroundAtIndex(i);
+        }
     }
 
 

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public abstract class PuzzleGrid : MonoBehaviour
-{
+{ 
     public ICommand Command;
     public Transform MainObject;
 
@@ -10,11 +10,17 @@ public abstract class PuzzleGrid : MonoBehaviour
 
     public void ExecuteGrid()
     {
-        if (Command != null)
+        if (Command != null && ControlCommand())
         {
             OnPuzzleGridTriggered.Invoke(Command);
         }
+        else
+        {
+            Debug.Log("FalseControl");
+        }
     }
 
-    public abstract void CreateCommand();
+    public abstract void CreateCommand(Vector2 ComingDir);
+
+    public abstract bool ControlCommand();
 }

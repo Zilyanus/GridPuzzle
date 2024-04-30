@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,12 +10,17 @@ public class GridScript : SurroundControl
 {
     public static UnityEvent<GameObject,GameObject> OnCombineGrids = new UnityEvent<GameObject,GameObject>();
 
-    [SerializeField] List<float> DebugFloats = new List<float>();
+    public List<float> DebugFloats = new List<float>();
     [SerializeField] List<Vector2> DebugFloats2 = new List<Vector2>();
+
+    [SerializeField] GameObject DebugObject;
     // Start is called before the first frame update
     void Start()
     {
         ControlSurround();
+
+        GameObject DebugObjectt = Instantiate(DebugObject, transform.position,Quaternion.identity);
+        DebugObjectt.GetComponent<DebugObject>().gridScript = this;
     }
 
     // Update is called once per frame
@@ -29,10 +35,10 @@ public class GridScript : SurroundControl
         SetSurroundAtIndex(2, Control(Vector2.right, 2));
         SetSurroundAtIndex(3, Control(-Vector2.right, 3));
 
-        DebugFloats[0] = GetSurroundAtIndex(0);
-        DebugFloats[1] = GetSurroundAtIndex(1);
-        DebugFloats[2] = GetSurroundAtIndex(2);
-        DebugFloats[3] = GetSurroundAtIndex(3);
+        for (int i = 0; i < DebugFloats.Count; i++)
+        {
+            DebugFloats[i] = GetSurroundAtIndex(i);
+        }
     }
 
     public override int Control(Vector2 vector2, int index)
