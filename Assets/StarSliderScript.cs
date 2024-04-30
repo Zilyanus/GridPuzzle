@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StarSliderScript : MonoBehaviour
 {
@@ -21,6 +23,8 @@ public class StarSliderScript : MonoBehaviour
 
 
     [SerializeField] TextMeshProUGUI TotalText;
+
+    [SerializeField] RectTransform BarTransform; 
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +36,7 @@ public class StarSliderScript : MonoBehaviour
     {
         CurrentValue = MovedCount;
         ImageScale.localScale = new Vector2(CurrentValue / TotalMoveCount, ImageScale.localScale.y);
+        BarTransform.sizeDelta = new Vector2(146 * (CurrentValue / TotalMoveCount <= 1 ? (CurrentValue / TotalMoveCount) : 1), 40f);
 
         for (int i = 0; i < MoveCounts.Count; i++)
         {
@@ -41,7 +46,7 @@ public class StarSliderScript : MonoBehaviour
                 StarBarsImages[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
         }
 
-        TotalText.text = (TotalMoveCount - CurrentValue).ToString();
+        TotalText.text = TotalMoveCount - CurrentValue >= 0 ?(TotalMoveCount - CurrentValue).ToString() : "0";
     }
 
     public void GetStarValues(float total,float s2, float s1, float s0)

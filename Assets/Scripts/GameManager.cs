@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] EndPanelScript EndPanel;
 
     public static UnityEvent OnGameFinished = new UnityEvent();
+    public static event Action OnLastFishAted;
+    public static event Action OnFishAted;
 
     [SerializeField] StarSliderScript StarSlider;
 
@@ -98,7 +101,12 @@ public class GameManager : MonoBehaviour
 
         if (CollectableCount == CollectedCount)
         {
-            EndTheGame();
+            OnLastFishAted.Invoke();
+            DOVirtual.DelayedCall(2, () => { EndTheGame(); });
+        }
+        else
+        {
+            OnFishAted.Invoke();
         }
     }
 
