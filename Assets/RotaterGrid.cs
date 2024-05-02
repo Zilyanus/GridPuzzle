@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class RotaterGrid : PuzzleGrid
     [SerializeField] LayerMask GridMask;
     Vector2 Dir;
     [SerializeField] float RotateValue = -90;
-
+    [SerializeField] Transform ChildTransform;
     public override void CreateCommand(Vector2 ComingDir)
     {
         Debug.Log("CreateCommand");
@@ -62,5 +63,18 @@ public class RotaterGrid : PuzzleGrid
 
         // Translate back to the original coordinate system
         return rotatedPoint + pivot;
+    }
+
+    [Button]
+    void TurnClockWise()
+    {
+        RotateValue = -90;
+        ChildTransform.transform.localScale = new Vector2(0.7f, 0.7f);
+    }
+    [Button]
+    void TurnCounterClockWise()
+    {
+        RotateValue = 90;
+        ChildTransform.transform.localScale = new Vector2(-0.7f, 0.7f);
     }
 }
