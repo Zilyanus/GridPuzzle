@@ -26,13 +26,24 @@ public class RotateCommand : ICommand
 
         ObjectToRotate.parent.parent = Pivot.transform;
 
-        OnGridRotate.Invoke(90);
+        Sequence sequence = DOTween.Sequence(this);
 
-        Pivot.transform.DORotate(Vector3.forward * RotateValue, 0.3f).OnComplete(() =>
+        sequence.Append(Pivot.transform.DOScale(1.2f, 0.3f));
+        sequence.AppendInterval(0.1f);
+
+        sequence.Append(Pivot.transform.DORotate(Vector3.forward * RotateValue, 0.3f));
+
+        sequence.Join(DOVirtual.DelayedCall(0,()=> OnGridRotate.Invoke(-RotateValue)));
+
+        sequence.AppendInterval(0.1f);
+        sequence.Append(Pivot.transform.DOScale(1f, 0.3f));
+
+        sequence.OnComplete(() =>
         {
             ObjectToRotate.parent.parent = OldParent;
             ObjectToRotate.GetComponentInParent<GridParent>().ControlSurround();
             UnityEngine.Object.Destroy(Pivot);
+            sequence.Kill();
         });
     }
 

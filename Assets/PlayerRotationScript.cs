@@ -29,6 +29,6 @@ public class PlayerRotationScript : MonoBehaviour
 
     void RotateThePlayer(float value)
     {
-        transform.DORotate(Vector3.zero, 0.3f);
+        transform.DORotate(Vector3.forward,0.3f);
     }
 }
