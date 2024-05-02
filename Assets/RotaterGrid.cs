@@ -6,6 +6,7 @@ public class RotaterGrid : PuzzleGrid
 {
     [SerializeField] LayerMask GridMask;
     Vector2 Dir;
+    [SerializeField] float RotateValue = -90;
 
     public override void CreateCommand(Vector2 ComingDir)
     {
@@ -13,7 +14,7 @@ public class RotaterGrid : PuzzleGrid
 
         Dir = ComingDir;
 
-        Command = new RotateCommand(MainObject,-90);
+        Command = new RotateCommand(MainObject, RotateValue);
     }
 
     public override bool ControlCommand()
@@ -28,7 +29,7 @@ public class RotaterGrid : PuzzleGrid
             if (Grid == PivotPoint || !Grid.GetComponent<GridScript>())
                 continue;
 
-            Vector2 Pos = RotatePoint(Grid.position, PivotPoint.position, -90);
+            Vector2 Pos = RotatePoint(Grid.position, PivotPoint.position, RotateValue);
 
             Debug.Log(Grid.name + " " +Dir + " " + Pos);
             //Pos += Dir;

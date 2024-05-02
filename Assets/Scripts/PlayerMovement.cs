@@ -127,22 +127,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (Movement.x > 0 && !isPressedX)
         {
-            isPressedX = true;
+            //isPressedX = true;
             MoveControl(2, "X", Movement.x, Vector3.right);
         }
         else if (Movement.x < 0 && !isPressedX)
         {
-            isPressedX = true;
+            //isPressedX = true;
             MoveControl(3, "X", Movement.x, Vector3.left);
         }
         else if (Movement.y > 0 && !isPressedY)
         {
-            isPressedY = true;
+            //isPressedY = true;
             MoveControl(0, "Y", Movement.y, Vector3.up);
         }
         else if (Movement.y < 0 && !isPressedY)
         {
-            isPressedY = true;
+            //isPressedY = true;
             MoveControl(1, "Y", Movement.y, Vector3.down);
         }
 
