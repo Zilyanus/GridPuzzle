@@ -49,8 +49,8 @@ public class PlayerMovement : MonoBehaviour
 
     List<PuzzleGrid> puzzleGrids = new List<PuzzleGrid>();
 
-    bool isPressedX = false;
-    bool isPressedY = false;
+    bool isMoving = false;
+
     private void Awake()
     {
         InputActions = new PlayerInputs();
@@ -115,34 +115,33 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             animator.SetFloat("X", 0);
-            isPressedX = false;
         }
 
         if (Movement.y == 0)
         {
-            animator.SetFloat("Y", 0);
-            isPressedY = false;
+            animator.SetFloat("Y", 0);          
         } 
+
+        if (Movement  == Vector2.zero)
+        {
+            isMoving = false;
+        }
         
 
-        if (Movement.x > 0 && !isPressedX)
+        if (Movement.x > 0 && !isMoving)
         {
-            //isPressedX = true;
             MoveControl(2, "X", Movement.x, Vector3.right);
         }
-        else if (Movement.x < 0 && !isPressedX)
+        else if (Movement.x < 0 && !isMoving)
         {
-            //isPressedX = true;
             MoveControl(3, "X", Movement.x, Vector3.left);
         }
-        else if (Movement.y > 0 && !isPressedY)
+        else if (Movement.y > 0 && !isMoving)
         {
-            //isPressedY = true;
             MoveControl(0, "Y", Movement.y, Vector3.up);
         }
-        else if (Movement.y < 0 && !isPressedY)
+        else if (Movement.y < 0 && !isMoving)
         {
-            //isPressedY = true;
             MoveControl(1, "Y", Movement.y, Vector3.down);
         }
 
@@ -163,6 +162,8 @@ public class PlayerMovement : MonoBehaviour
     {
         MainCommand _mainCommand = new MainCommand();
         puzzleGrids.Clear();
+
+        isMoving = true;
 
         if (playerSurrounding.GetSurroundAtIndex(index) == 1 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
         {
@@ -211,12 +212,20 @@ public class PlayerMovement : MonoBehaviour
                 transform.GetComponent<SurroundControl>().ControlSurround();
                 if (puzzleGrids.Count > 0)
                 {
+                    animator.SetFloat("X", 0);
+                    animator.SetFloat("Y", 0);
+
                     for (int i = 0; i < puzzleGrids.Count; i++)
                     {
                         puzzleGrids[i].ExecuteGrid();
                     }
-                        puzzleGrids.Clear();
-                }                 
+                    puzzleGrids.Clear();
+                    DOVirtual.DelayedCall(1.1f,()=> isMoving = false);
+                }
+                else
+                {
+                    isMoving = false;
+                }
             });
             movementTimeSpeedMap[dir] = 0;
         }
