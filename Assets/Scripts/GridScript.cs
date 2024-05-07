@@ -19,7 +19,7 @@ public class GridScript : SurroundControl
     {
         ControlSurround();
 
-        GameObject DebugObjectt = Instantiate(DebugObject, transform.position,Quaternion.identity);
+        GameObject DebugObjectt = Instantiate(DebugObject, transform.position, Quaternion.identity);
         DebugObjectt.GetComponent<DebugObject>().gridScript = this;
     }
 

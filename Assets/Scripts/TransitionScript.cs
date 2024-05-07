@@ -14,11 +14,13 @@ public class TransitionScript : MonoBehaviour
     bool Triggered;
     int SceneToLoad;
 
+    public static event Action<int> OnTransitionTriggered;
+
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponentInChildren<Animator>();
-        animator.Play("TransitionEnd");
+        //animator = GetComponentInChildren<Animator>();
+        //animator.Play("TransitionEnd");
         AudioClass.PlayAudio("TransitionSound", 1);
     }
     private void OnEnable()
@@ -34,11 +36,11 @@ public class TransitionScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("TransitionStart") && AnimatorIsFinished() && !Triggered)
-        {
-            Triggered = true;
-            SceneManager.LoadScene(SceneToLoad);
-        }
+        //if (animator.GetCurrentAnimatorStateInfo(0).IsName("TransitionStart") && AnimatorIsFinished() && !Triggered)
+        //{
+        //    Triggered = true;
+        //    SceneManager.LoadScene(SceneToLoad);
+        //}
     }
 
     public void LoadLastLevel()
@@ -49,7 +51,8 @@ public class TransitionScript : MonoBehaviour
     public void LoadLevel(int index)
     {
         SceneToLoad = index;
-        StartAnimation();
+        OnTransitionTriggered.Invoke(SceneToLoad);
+        //StartAnimation();
     }
 
     void StartAnimation()
