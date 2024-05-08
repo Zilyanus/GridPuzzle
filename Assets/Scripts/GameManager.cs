@@ -76,6 +76,11 @@ public class GameManager : MonoBehaviour
         StartMoveText.text = TotalMoveCount.ToString();
 
         StarSlider.MovedCount = MoveCount;
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            EndPanel.EndLevel(3, LevelCount);
+        }
     }
 
     void OnPlayerMoved()

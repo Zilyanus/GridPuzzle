@@ -50,4 +50,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/seyhan/level 13.unity
     guid: 649e5cff16d2e674a9b087fd6b9b633e
+  - enabled: 1
+    path: Assets/Scenes/seyhan/level 14.unity
+    guid: 14a8a81ef92d09b44902bfc43cb82b6d
+  - enabled: 1
+    path: Assets/Scenes/seyhan/level 15.unity
+    guid: d807d5a0f996fd44fb12d202cea4d080
+  - enabled: 1
+    path: Assets/Scenes/seyhan/level 16.unity
+    guid: 50cd4565dc990e54c946116e431e32e1
+  - enabled: 1
+    path: Assets/Scenes/seyhan/level 17.unity
+    guid: 67a62d4005c5aec4dbd9b2f0a6718cc7
+  - enabled: 1
+    path: Assets/Scenes/seyhan/level 18.unity
+    guid: f559f4c290bc5904fa7e143b695cbe26
   m_configObjects: {}

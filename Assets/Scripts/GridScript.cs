@@ -19,8 +19,8 @@ public class GridScript : SurroundControl
     {
         ControlSurround();
 
-        GameObject DebugObjectt = Instantiate(DebugObject, transform.position, Quaternion.identity);
-        DebugObjectt.GetComponent<DebugObject>().gridScript = this;
+        //GameObject DebugObjectt = Instantiate(DebugObject, transform.position, Quaternion.identity);
+        //DebugObjectt.GetComponent<DebugObject>().gridScript = this;
     }
 
     // Update is called once per frame
