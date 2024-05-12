@@ -33,8 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] LayerMask GridMask;
 
-    //MoveInvoker moveInvoker;
-
     public static event Action OnMoved;
     public static event Action OnUndoPressed;
     public static event Action OnRedoPressed;
@@ -72,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        //moveInvoker = new MoveInvoker();
 
         playerSurrounding = GetComponent<PlayerSurrounding>();
 
@@ -196,7 +193,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            //Debug.Log(playerSurrounding.GetSurroundAtIndex(index) + " " + gridParent.GetSurroundAtIndex(index));
+            Debug.Log(playerSurrounding.GetSurroundAtIndex(index) + " " + gridParent.GetSurroundAtIndex(index));
         }
     }
     
