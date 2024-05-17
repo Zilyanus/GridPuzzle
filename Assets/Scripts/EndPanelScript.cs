@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using ZilyanusLib.Audio;
 
 public class EndPanelScript : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class EndPanelScript : MonoBehaviour
     [SerializeField] List<GameObject> Starts;
 
     [SerializeField] List<GameObject> WinLosePanels;
+
+    [SerializeField] SoundData LoseSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class EndPanelScript : MonoBehaviour
     {
         if (score == 0)
         {
+            AudioClass.PlayAudio(LoseSound);
             WinLosePanels[0].SetActive(true);
         }
         else

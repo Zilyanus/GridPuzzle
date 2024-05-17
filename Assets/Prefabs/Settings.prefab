@@ -179,7 +179,7 @@ MonoBehaviour:
   PointerExit:
     m_PersistentCalls:
       m_Calls: []
-  ButtonSound: 
+  ButtonSound: ButtonSound
   ButtonClip: {fileID: 0}
   ButtonScaleFactor: 1.25
   ButtonScaleSpeed: 0.3
@@ -406,7 +406,7 @@ MonoBehaviour:
   PointerExit:
     m_PersistentCalls:
       m_Calls: []
-  ButtonSound: 
+  ButtonSound: ButtonSound
   ButtonClip: {fileID: 0}
   ButtonScaleFactor: 1.25
   ButtonScaleSpeed: 0.3

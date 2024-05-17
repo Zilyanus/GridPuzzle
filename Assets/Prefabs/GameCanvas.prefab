@@ -792,6 +792,9 @@ MonoBehaviour:
   WinLosePanels:
   - {fileID: 4075668138343720495}
   - {fileID: 7529911899870958422}
+  LoseSound:
+    SoundName: LoseSound
+    Volume: 1
 --- !u!1 &2415908717696733408
 GameObject:
   m_ObjectHideFlags: 0

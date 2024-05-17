@@ -11,6 +11,8 @@ namespace ZilyanusLib
     namespace Audio
     {
         using UnityEngine.Audio;
+        using UnityEngine.Rendering;
+
         public class AudioClass
         {
             public static AudioClip FindClip(string ClipName, string AudioMixerName = "General", string AudioMixerGroupName = "Sound")
@@ -53,6 +55,11 @@ namespace ZilyanusLib
                 audioSource.pitch = Pitch;
                 audioSource.Play();
                 Object.Destroy(gameObject, clip.length);
+            }
+
+            public static void PlayAudio(SoundData soundData, string AudioMixerName = "General", string AudioMixerGroupName = "Sound", float Pitch = 1)
+            {
+                PlayAudio(soundData.SoundName, soundData.Volume, AudioMixerName,AudioMixerGroupName, Pitch);
             }
         }
     }

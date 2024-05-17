@@ -983,6 +983,9 @@ MonoBehaviour:
   GridMask:
     serializedVersion: 2
     m_Bits: 8
+  soundData:
+    SoundName: MoveSound
+    Volume: 1
 --- !u!114 &8329185752008863578
 MonoBehaviour:
   m_ObjectHideFlags: 0

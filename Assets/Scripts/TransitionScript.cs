@@ -5,24 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ZilyanusLib.Audio;
 
 public class TransitionScript : MonoBehaviour
 {
     Animator animator;
 
-    bool Triggered;
     int SceneToLoad;
 
     public static event Action<int> OnTransitionTriggered;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //animator = GetComponentInChildren<Animator>();
-        //animator.Play("TransitionEnd");
-        AudioClass.PlayAudio("TransitionSound", 1);
-    }
     private void OnEnable()
     {
         LevelSelector.OnLevelClicked.AddListener(OnLevelClicked);
@@ -31,16 +21,6 @@ public class TransitionScript : MonoBehaviour
     private void OnDisable()
     {
         LevelSelector.OnLevelClicked.RemoveListener(OnLevelClicked);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (animator.GetCurrentAnimatorStateInfo(0).IsName("TransitionStart") && AnimatorIsFinished() && !Triggered)
-        //{
-        //    Triggered = true;
-        //    SceneManager.LoadScene(SceneToLoad);
-        //}
     }
 
     public void LoadLastLevel()
@@ -52,13 +32,6 @@ public class TransitionScript : MonoBehaviour
     {
         SceneToLoad = index;
         OnTransitionTriggered.Invoke(SceneToLoad);
-        //StartAnimation();
-    }
-
-    void StartAnimation()
-    {
-        animator.Play("TransitionStart");
-        AudioClass.PlayAudio("TransitionSound", 1);
     }
 
     [Button]

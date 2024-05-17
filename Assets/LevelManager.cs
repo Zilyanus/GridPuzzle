@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using ZilyanusLib.Audio;
 
 public class LevelManager : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class LevelManager : MonoBehaviour
 
     public async void LoadScene(int index)
     {
+        AudioClass.PlayAudio("TransitionSound", 1);
         var scene = SceneManager.LoadSceneAsync(index);
         scene.allowSceneActivation = false;
 

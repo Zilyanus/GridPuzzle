@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using ZilyanusLib.Audio;
 
 public class GridParent : SurroundControl
 {
@@ -84,6 +85,8 @@ public class GridParent : SurroundControl
 
     public void CombineFeel()
     {
+        AudioClass.PlayAudio("MergeSound",1);
+
         for (int i = 0; i < Grids.Count; i++)
         {
             if (Grids[i].GetTransform().GetComponent<GridScript>() != null)

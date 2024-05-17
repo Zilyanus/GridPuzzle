@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using ZilyanusLib.Audio;
 
 public class CollectableScript : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class CollectableScript : MonoBehaviour
 
     [SerializeField] Transform Effect;
 
+    [SerializeField] SoundData soundData;
     private void Start()
     {
         OnSpawned?.Invoke();
@@ -49,6 +51,7 @@ public class CollectableScript : MonoBehaviour
 
     public void Collected()
     {
+        AudioClass.PlayAudio(soundData);
         isCollected = true;
         OnCollected?.Invoke();
         transform.DOScale(1.5f,0.25f).OnComplete(()=>transform.DOScale(0f, 0.3f).OnComplete(() => Destroy(gameObject)));       

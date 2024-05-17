@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System;
+using ZilyanusLib.Audio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -47,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
     List<PuzzleGrid> puzzleGrids = new List<PuzzleGrid>();
 
     bool isMoving = false;
+
+    [SerializeField] SoundData soundData;
 
     private void Awake()
     {
@@ -207,11 +210,12 @@ public class PlayerMovement : MonoBehaviour
     
     public void Move(Vector3 dir, Transform transform)
     {
+        AudioClass.PlayAudio(soundData);
+
         movementTimeSpeedMap[dir] += Time.deltaTime;
         if (!DOTween.IsTweening(transform))
         {
             OnMoved.Invoke();
-            //transform.DOMove(transform.position + dir, EvalSpeed(movementTimeSpeedMap[dir])).OnComplete(() => { transform.GetComponent<SurroundControl>().ControlSurround(); });
             transform.DOMove(transform.position + dir, 0.332f / Speed).SetEase(Ease.InOutCubic).OnComplete(() => 
             {                
                 transform.GetComponent<SurroundControl>().ControlSurround();
