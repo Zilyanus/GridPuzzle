@@ -1,13 +1,10 @@
 ﻿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System;
-using Unity.VisualScripting;
-using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -30,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
             {Vector3.up, 0f},
             {Vector3.down, 0f},
         };
+
+    float movementTimeSpeed = 0;
 
     [SerializeField] LayerMask GridMask;
 
@@ -99,15 +98,19 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 Movement = (isStartAnimationEnded && !CantMove) ? InputActions.Player.Movement.ReadValue<Vector2>() : Vector2.zero;
 
+        Speed = EvalSpeed(movementTimeSpeed);
 
+        animator.speed = Speed;
 
         if (Movement.x < 0)
         {
             transform.localScale = new Vector3(-1f, 0.9f, 1);
+            movementTimeSpeed += Time.deltaTime;
         }
         else if (Movement.x > 0)
         {
             transform.localScale = new Vector3(1f, 0.9f, 1);
+            movementTimeSpeed += Time.deltaTime;
         }
         else
         {
@@ -116,11 +119,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (Movement.y == 0)
         {
-            animator.SetFloat("Y", 0);          
-        } 
+            animator.SetFloat("Y", 0);
+        }
+        else
+        {
+            movementTimeSpeed += Time.deltaTime;
+        }
 
         if (Movement  == Vector2.zero)
         {
+            movementTimeSpeed = 0;
             isMoving = false;
         }
         
@@ -204,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
         {
             OnMoved.Invoke();
             //transform.DOMove(transform.position + dir, EvalSpeed(movementTimeSpeedMap[dir])).OnComplete(() => { transform.GetComponent<SurroundControl>().ControlSurround(); });
-            transform.DOMove(transform.position + dir, 0.332f).SetEase(Ease.InOutCubic).OnComplete(() => 
+            transform.DOMove(transform.position + dir, 0.332f / Speed).SetEase(Ease.InOutCubic).OnComplete(() => 
             {                
                 transform.GetComponent<SurroundControl>().ControlSurround();
                 if (puzzleGrids.Count > 0)
@@ -240,7 +248,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float EvalSpeed(float presseDuratıon)
     {
-        return Speed / Mathf.Clamp(pressedTımeSpeedCurve.Evaluate(presseDuratıon), 1f, 15f);
+        return Mathf.Clamp(pressedTımeSpeedCurve.Evaluate(presseDuratıon), 1f, 15f);
     }
 
     void OnPausedChange(bool value)
