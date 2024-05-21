@@ -212,6 +212,6 @@ MonoBehaviour:
   MainObject: {fileID: 0}
   GridMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 64
   RotateValue: -90
   ChildTransform: {fileID: 6488184085498483965}

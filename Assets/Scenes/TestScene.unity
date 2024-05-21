@@ -3949,7 +3949,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6488184085498483965, guid: 648a91c658924074c93e1cb3d2b59bed, type: 3}
       propertyPath: m_LocalScale.x
-      value: -0.7
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 6488184085498483965, guid: 648a91c658924074c93e1cb3d2b59bed, type: 3}
       propertyPath: m_LocalScale.z
@@ -3957,7 +3957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8007560004988873174, guid: 648a91c658924074c93e1cb3d2b59bed, type: 3}
       propertyPath: RotateValue
-      value: 90
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 8007560004988873174, guid: 648a91c658924074c93e1cb3d2b59bed, type: 3}
       propertyPath: GridMask.m_Bits

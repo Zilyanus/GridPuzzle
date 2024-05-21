@@ -46,6 +46,10 @@ public class RotaterGrid : PuzzleGrid
                 Debug.Log(Pos.ToString() + " is Full " + Grid.name + " Cant Rotate");
                 return false;
             }
+            else
+            {
+                Debug.Log("H" + hit.collider.gameObject.name);
+            }
         }
         return true;
     }
