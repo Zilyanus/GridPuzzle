@@ -52,4 +52,9 @@ public class MoveCommand : ICommand
     {
         _movement.Move(_dir, _transform);
     }
+
+    public float ReturnExecutionTime()
+    {
+        return 0.332f;
+    }
 }

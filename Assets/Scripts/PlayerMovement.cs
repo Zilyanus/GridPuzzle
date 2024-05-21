@@ -155,6 +155,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (InputActions.Player.UndoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
         {
+            Debug.Log("Undo");
             OnUndoPressed.Invoke();
         }
         else if (InputActions.Player.RedoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))

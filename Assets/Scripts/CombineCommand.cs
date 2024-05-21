@@ -132,4 +132,8 @@ public class CombineCommand : ICommand
         GameObject NewSubGrid = Object.Instantiate<GameObject>(SubGrid, GridParent);
         NewSubGrid.transform.position = Pos;
     }
+    public float ReturnExecutionTime()
+    {
+        return 0f;
+    }
 }

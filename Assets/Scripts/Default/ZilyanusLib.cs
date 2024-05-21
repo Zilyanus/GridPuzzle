@@ -13,7 +13,7 @@ namespace ZilyanusLib
         using UnityEngine.Audio;
         using UnityEngine.Rendering;
 
-        public class AudioClass
+        public static class AudioClass
         {
             public static AudioClip FindClip(string ClipName, string AudioMixerName = "General", string AudioMixerGroupName = "Sound")
             {

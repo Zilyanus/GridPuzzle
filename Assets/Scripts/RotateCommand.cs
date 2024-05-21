@@ -19,6 +19,11 @@ public class RotateCommand : ICommand
 
     public void Execute()
     {
+        Rotate(RotateValue);
+    }
+
+    void Rotate(float Value)
+    {
         Transform OldParent = ObjectToRotate.parent.parent;
 
         GameObject Pivot = new GameObject();
@@ -31,9 +36,9 @@ public class RotateCommand : ICommand
         sequence.Append(Pivot.transform.DOScale(1.2f, 0.3f));
         sequence.AppendInterval(0.1f);
 
-        sequence.Append(Pivot.transform.DORotate(Vector3.forward * RotateValue, 0.3f));
+        sequence.Append(Pivot.transform.DORotate(Vector3.forward * Value, 0.3f));
 
-        sequence.Join(DOVirtual.DelayedCall(0,()=> OnGridRotate.Invoke(-RotateValue)));
+        sequence.Join(DOVirtual.DelayedCall(0, () => OnGridRotate.Invoke(-Value)));
 
         sequence.AppendInterval(0.1f);
         sequence.Append(Pivot.transform.DOScale(1f, 0.3f));
@@ -49,12 +54,18 @@ public class RotateCommand : ICommand
 
     public bool Undo()
     {
+        Rotate(-RotateValue);
         return true;
     }
 
     public void Redo()
     {
+        Rotate(RotateValue);
+    }
 
+    public float ReturnExecutionTime()
+    {
+        return 2f;
     }
 }
 

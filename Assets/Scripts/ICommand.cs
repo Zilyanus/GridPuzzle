@@ -14,4 +14,9 @@ public interface ICommand
     {
 
     }
+
+    public float ReturnExecutionTime()
+    {
+        return 0;
+    }
 }

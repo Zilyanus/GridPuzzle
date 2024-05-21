@@ -1,5 +1,7 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MainCommand : ICommand
@@ -16,10 +18,14 @@ public class MainCommand : ICommand
 
     public bool Undo()
     {
+        Sequence sequence = DOTween.Sequence();
         for (int i = _commandList.Count - 1; i >= 0; i--)
         {
-            _commandList[i].Undo();
+            Debug.Log(_commandList.Count + " " + i);
+
+            sequence.Append(DOVirtual.DelayedCall(i == _commandList.Count - 1 ? 0 : _commandList[i + 1].ReturnExecutionTime(),()=> _commandList[i].Undo()));
         }
+
         return true;
     }
 
@@ -34,5 +40,14 @@ public class MainCommand : ICommand
     public void AddCommand(ICommand command)
     {
         _commandList.Add(command);
+    }
+
+    IEnumerator UndoFor()
+    {
+        for (int i = _commandList.Count - 1; i >= 0; i--)
+        {
+            _commandList[i].Undo();
+            yield return new WaitForSeconds(_commandList[i].ReturnExecutionTime());
+        }
     }
 }
