@@ -9,6 +9,7 @@ using ZilyanusLib.Audio;
 public class GridParent : SurroundControl
 {
     public List<ISurroundable> Grids = new List<ISurroundable>();
+    public List<SubGridScript> SubGrids = new List<SubGridScript>();
 
     public static event Action<GridParent> OnSpawned;
     public int GridParentdIndex;

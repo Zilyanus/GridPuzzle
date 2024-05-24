@@ -23,6 +23,10 @@ public class RotaterGrid : PuzzleGrid
         Debug.Log("ControlCommand");
         Transform PivotPoint = MainObject;
         List<ISurroundable> Grids = PivotPoint.GetComponentInParent<GridParent>().Grids;
+        List<SubGridScript> SubGrids = PivotPoint.GetComponentInParent<GridParent>().SubGrids;
+
+        Debug.Log(Grids.Count + "Count");
+
         for (int i = 0; i < Grids.Count; i++)
         {
             Transform Grid = Grids[i].GetTransform();
@@ -35,9 +39,9 @@ public class RotaterGrid : PuzzleGrid
             Debug.Log(Grid.name + " " +Dir + " " + Pos);
             //Pos += Dir;
 
-            RaycastHit2D hit = Physics2D.BoxCast(Pos, Vector2.one * 0.1f,0,transform.up,0.1f, GridMask);
+            RaycastHit2D hit = Physics2D.BoxCast(Pos, Vector2.one * 0.05f,0,transform.up,0.1f, GridMask);
 
-            if (!hit)
+            if (hit)
             {
                 GameObject Pos1Object = new GameObject("Pos1Object");
                 GameObject Pos2Object = new GameObject("Pos2Object");
@@ -45,10 +49,6 @@ public class RotaterGrid : PuzzleGrid
                 Pos2Object.transform.position = Pos;
                 Debug.Log(Pos.ToString() + " is Full " + Grid.name + " Cant Rotate");
                 return false;
-            }
-            else
-            {
-                Debug.Log("H" + hit.collider.gameObject.name);
             }
         }
         return true;
