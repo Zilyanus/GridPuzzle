@@ -31,13 +31,18 @@ public class RotaterGrid : PuzzleGrid
         {
             Transform Grid = Grids[i].GetTransform();
 
-            if (Grid == PivotPoint || !Grid.GetComponent<GridScript>())
+            if (Grid == PivotPoint || !Grid.GetComponent<GridScript>() && !Grid.GetComponent<SubGridScript>())
                 continue;
 
             Vector2 Pos = RotatePoint(Grid.position, PivotPoint.position, RotateValue);
 
             Debug.Log(Grid.name + " " +Dir + " " + Pos);
             //Pos += Dir;
+
+            if (Grid.GetComponent<SubGridScript>() != null)
+            {
+                Debug.Log("SubGrid");
+            }
 
             RaycastHit2D hit = Physics2D.BoxCast(Pos, Vector2.one * 0.05f,0,transform.up,0.1f, GridMask);
 

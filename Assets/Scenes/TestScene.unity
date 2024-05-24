@@ -260,6 +260,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BG (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 4842774984724980054, guid: afaf4dbca85e83d41bdfbb6f87802efc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403574220826715608, guid: afaf4dbca85e83d41bdfbb6f87802efc, type: 3}
+      propertyPath: InWalls.Left
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afaf4dbca85e83d41bdfbb6f87802efc, type: 3}
 --- !u!4 &325472325 stripped
@@ -2646,10 +2654,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8007560004988873174, guid: 648a91c658924074c93e1cb3d2b59bed, type: 3}
-      propertyPath: GridMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 8007560004988873175, guid: 648a91c658924074c93e1cb3d2b59bed, type: 3}
       propertyPath: m_Name
       value: RotatorGrid (1)
@@ -3958,10 +3962,6 @@ PrefabInstance:
     - target: {fileID: 8007560004988873174, guid: 648a91c658924074c93e1cb3d2b59bed, type: 3}
       propertyPath: RotateValue
       value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 8007560004988873174, guid: 648a91c658924074c93e1cb3d2b59bed, type: 3}
-      propertyPath: GridMask.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 8007560004988873175, guid: 648a91c658924074c93e1cb3d2b59bed, type: 3}
       propertyPath: m_Name
