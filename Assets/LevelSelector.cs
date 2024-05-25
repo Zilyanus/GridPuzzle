@@ -102,7 +102,11 @@ public class LevelSelector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.T)) 
+        {
+            isLocked = false;
+            LevelText.gameObject.SetActive(true);
+        }
     }
 
     public void GetData(int levelIndex, Vector2 Pos)
