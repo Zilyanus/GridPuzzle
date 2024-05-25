@@ -65,4 +65,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/seyhan/level 18.unity
     guid: f559f4c290bc5904fa7e143b695cbe26
+  - enabled: 1
+    path: Assets/Scenes/Sevval/Slevel 19.unity
+    guid: 56762888ebe700243b154b894d3354fd
+  - enabled: 1
+    path: Assets/Scenes/Sevval/Slevel 21.unity
+    guid: e5fa1dedd96f47247813917cf5cdc1c7
   m_configObjects: {}

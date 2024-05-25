@@ -9,6 +9,7 @@ public class RotateCommand : ICommand
     Transform ObjectToRotate;
     float RotateValue;
 
+    public static event Action<bool> OnStartGridRotate;
     public static event Action<float> OnGridRotate;
 
     public RotateCommand(Transform RotatingObject, float rotateValue)
@@ -24,6 +25,7 @@ public class RotateCommand : ICommand
 
     void Rotate(float Value)
     {
+        OnStartGridRotate.Invoke(true);
         Transform OldParent = ObjectToRotate.parent.parent;
 
         GameObject Pivot = new GameObject();
@@ -46,6 +48,7 @@ public class RotateCommand : ICommand
         sequence.OnComplete(() =>
         {
             ObjectToRotate.parent.parent = OldParent;
+            OnStartGridRotate.Invoke(false);
             ObjectToRotate.GetComponentInParent<GridParent>().ControlSurround();
             UnityEngine.Object.Destroy(Pivot);
             sequence.Kill();

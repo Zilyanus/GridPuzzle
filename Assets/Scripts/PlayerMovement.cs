@@ -51,10 +51,14 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] SoundData soundData;
 
+    PlayerRotationScript playerRotationScript;
+
     private void Awake()
     {
         InputActions = new PlayerInputs();
         InputActions.Player.Enable();
+
+        playerRotationScript = GetComponent<PlayerRotationScript>();    
     }
 
     private void OnEnable()
@@ -99,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CantMove = isPaused || isGameFinished;
 
-        Vector2 Movement = (isStartAnimationEnded && !CantMove) ? InputActions.Player.Movement.ReadValue<Vector2>() : Vector2.zero;
+        Vector2 Movement = (isStartAnimationEnded && !CantMove && !playerRotationScript.isRotating) ? InputActions.Player.Movement.ReadValue<Vector2>() : Vector2.zero;
 
         Speed = EvalSpeed(movementTimeSpeed);
 

@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class PlayerRotationScript : MonoBehaviour
 {
+    public bool isRotating;
+
     private void OnEnable()
     {
         RotateCommand.OnGridRotate += RotateThePlayer; 
+        RotateCommand.OnStartGridRotate += OnStartGridRotate; 
     }
 
     private void OnDisable()
     {
         RotateCommand.OnGridRotate -= RotateThePlayer;
+        RotateCommand.OnStartGridRotate -= OnStartGridRotate;
     }
 
     // Start is called before the first frame update
@@ -29,6 +33,11 @@ public class PlayerRotationScript : MonoBehaviour
 
     void RotateThePlayer(float value)
     {
-        transform.DORotate(Vector3.forward,0.3f);
+        transform.DORotate(Vector3.forward, 0.3f);
+    }
+
+    void OnStartGridRotate(bool value)
+    {
+        isRotating = value;
     }
 }
