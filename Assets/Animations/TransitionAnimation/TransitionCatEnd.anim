@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TransitionCatStart
+  m_Name: TransitionCatEnd
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -101,4 +101,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: OnAnimationFinished
+    data: 
+    objectReferenceParameter: {fileID: 5535868280837127911, guid: 4e094aa8f8c649148a69cd036fdba3a3, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

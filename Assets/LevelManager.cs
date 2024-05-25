@@ -58,9 +58,12 @@ public class LevelManager : MonoBehaviour
         scene.allowSceneActivation = true;
 
         animator.SetTrigger("End");
-        BgImage.DOFade(0, 1.5f).OnComplete(() =>
-        {
-            LoaderCanvas.SetActive(false);
-        });
+
+        BgImage.DOFade(0, 1.5f);        
+    }
+
+    public void ClosePanel()
+    {
+        LoaderCanvas.SetActive(false);
     }
 }
