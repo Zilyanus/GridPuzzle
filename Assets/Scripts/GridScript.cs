@@ -55,7 +55,7 @@ public class GridScript : SurroundControl
         }
         else if (hit && hit.collider.gameObject.layer == 11)
         {
-            hit.collider.gameObject.GetComponent<PuzzleGrid>().MainObject = transform;
+            hit.collider.gameObject.GetComponent<PuzzleGrid>().MainObjects[-vector2] = transform;
             SetPuzzleGridAtIndex(index, hit.collider.gameObject.GetComponent<PuzzleGrid>());
             //Debug.Log("HEY " + GetPuzzleGridAtIndex(index));
             return 4;

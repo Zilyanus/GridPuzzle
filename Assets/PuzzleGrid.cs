@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Sirenix.OdinInspector;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PuzzleGrid : MonoBehaviour
+public abstract class PuzzleGrid : SerializedMonoBehaviour
 { 
     public ICommand Command;
-    public Transform MainObject;
+    public Dictionary<Vector3,Transform> MainObjects;
 
     public static event Action<ICommand> OnPuzzleGridTriggered;
 
@@ -23,4 +25,9 @@ public abstract class PuzzleGrid : MonoBehaviour
     public abstract void CreateCommand(Vector2 ComingDir);
 
     public abstract bool ControlCommand();
+
+    public void GetMainObject(Transform newObject, Vector3 Dir)
+    {
+        MainObjects.Add(Dir,newObject);  
+    }
 }

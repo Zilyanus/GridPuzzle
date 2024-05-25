@@ -13,17 +13,16 @@ public class RotaterGrid : PuzzleGrid
     {
         Debug.Log("CreateCommand");
 
-        Dir = ComingDir;
+        Dir = -ComingDir;
 
-        Command = new RotateCommand(MainObject, RotateValue);
+        Command = new RotateCommand(MainObjects[Dir], RotateValue);
     }
 
     public override bool ControlCommand()
     {
-        Debug.Log("ControlCommand");
-        Transform PivotPoint = MainObject;
+        Debug.Log("ControlCommand " + Dir);
+        Transform PivotPoint = MainObjects[Dir];
         List<ISurroundable> Grids = PivotPoint.GetComponentInParent<GridParent>().Grids;
-        List<SubGridScript> SubGrids = PivotPoint.GetComponentInParent<GridParent>().SubGrids;
 
         Debug.Log(Grids.Count + "Count");
 
@@ -37,16 +36,10 @@ public class RotaterGrid : PuzzleGrid
             Vector2 Pos = RotatePoint(Grid.position, PivotPoint.position, RotateValue);
 
             Debug.Log(Grid.name + " " +Dir + " " + Pos);
-            //Pos += Dir;
-
-            if (Grid.GetComponent<SubGridScript>() != null)
-            {
-                Debug.Log("SubGrid");
-            }
 
             RaycastHit2D hit = Physics2D.BoxCast(Pos, Vector2.one * 0.05f,0,transform.up,0.1f, GridMask);
 
-            if (hit)
+            if (hit && hit.collider.transform.parent != Grid.parent)
             {
                 GameObject Pos1Object = new GameObject("Pos1Object");
                 GameObject Pos2Object = new GameObject("Pos2Object");
