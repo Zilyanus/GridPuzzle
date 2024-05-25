@@ -6,6 +6,7 @@ using UnityEngine;
 public class RotaterGrid : PuzzleGrid
 {
     [SerializeField] LayerMask GridMask;
+    [SerializeField] LayerMask BgGridMask;
     Vector2 Dir;
     [SerializeField] float RotateValue = -90;
     [SerializeField] Transform ChildTransform;
@@ -39,7 +40,11 @@ public class RotaterGrid : PuzzleGrid
 
             RaycastHit2D hit = Physics2D.BoxCast(Pos, Vector2.one * 0.05f,0,transform.up,0.1f, GridMask);
 
-            if (hit && hit.collider.transform.parent != Grid.parent)
+            RaycastHit2D hit2 = Physics2D.BoxCast(Pos, Vector2.one * 0.05f, 0, transform.up, 0.1f, BgGridMask);
+
+            bool ControlBg = Grid.GetComponent<SubGridScript>() != null ? true : hit2;
+
+            if ((hit && hit.collider.transform.parent != Grid.parent) || !ControlBg)
             {
                 GameObject Pos1Object = new GameObject("Pos1Object");
                 GameObject Pos2Object = new GameObject("Pos2Object");

@@ -340,5 +340,8 @@ MonoBehaviour:
   GridMask:
     serializedVersion: 2
     m_Bits: 136
+  BgGridMask:
+    serializedVersion: 2
+    m_Bits: 64
   RotateValue: -90
   ChildTransform: {fileID: 6488184085498483965}
