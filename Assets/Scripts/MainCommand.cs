@@ -8,6 +8,8 @@ public class MainCommand : ICommand
 {
     [SerializeField] List<ICommand> _commandList = new List<ICommand>();
 
+    MonoBehaviour monoBehaviour;
+
     public void Execute()
     {
         for (int i = 0; i < _commandList.Count; i++)
@@ -18,14 +20,7 @@ public class MainCommand : ICommand
 
     public bool Undo()
     {
-        Sequence sequence = DOTween.Sequence();
-        for (int i = _commandList.Count - 1; i >= 0; i--)
-        {
-            Debug.Log(_commandList.Count + " " + i);
-
-            sequence.Append(DOVirtual.DelayedCall(i == _commandList.Count - 1 ? 0 : _commandList[i + 1].ReturnExecutionTime(),()=> _commandList[i].Undo()));
-        }
-
+        monoBehaviour.StartCoroutine(UndoFor());
         return true;
     }
 
@@ -42,10 +37,17 @@ public class MainCommand : ICommand
         _commandList.Add(command);
     }
 
+    public void AddMono(MonoBehaviour NewMonoBehaviour)
+    {
+        if (monoBehaviour == null)
+            monoBehaviour = NewMonoBehaviour;
+    }
+
     IEnumerator UndoFor()
     {
         for (int i = _commandList.Count - 1; i >= 0; i--)
         {
+            Debug.Log(_commandList[i] + " " + Time.time);
             _commandList[i].Undo();
             yield return new WaitForSeconds(_commandList[i].ReturnExecutionTime());
         }

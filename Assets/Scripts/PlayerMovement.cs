@@ -53,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerRotationScript playerRotationScript;
 
+    bool PressedUndo;
+    bool PressedRedo;
     private void Awake()
     {
         InputActions = new PlayerInputs();
@@ -157,15 +159,22 @@ public class PlayerMovement : MonoBehaviour
             MoveControl(1, "Y", Movement.y, Vector3.down);
         }
 
-        if (InputActions.Player.UndoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+        if (InputActions.Player.UndoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform) && !PressedUndo && !playerRotationScript.isRotating)
         {
-            Debug.Log("Undo");
+            PressedUndo = true;
             OnUndoPressed.Invoke();
         }
-        else if (InputActions.Player.RedoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform))
+        else if (InputActions.Player.RedoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform) && !PressedRedo && !playerRotationScript.isRotating)
         {
+            PressedRedo = true;
             OnRedoPressed.Invoke();
         }
+
+        if (InputActions.Player.UndoButton.ReadValue<float>() == 0)
+            PressedUndo = false;
+
+        if (InputActions.Player.RedoButton.ReadValue<float>() == 0)
+            PressedRedo = false;
 
         if (InputActions.Player.RestartA.ReadValue<float>() != 0)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

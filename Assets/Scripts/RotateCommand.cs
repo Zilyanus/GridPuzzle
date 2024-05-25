@@ -68,7 +68,7 @@ public class RotateCommand : ICommand
 
     public float ReturnExecutionTime()
     {
-        return 2f;
+        return 1.1f;
     }
 }
 

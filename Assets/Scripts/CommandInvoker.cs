@@ -1,13 +1,14 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CommandInvoker : MonoBehaviour
+public class CommandInvoker : SerializedMonoBehaviour
 {
-    MainCommand latestCommand;
-    Stack<MainCommand> _commandList = new Stack<MainCommand>();
-    Stack<MainCommand> _undoCommandList = new Stack<MainCommand>();
+    [SerializeField] MainCommand latestCommand;
+    [SerializeField] Stack<MainCommand> _commandList = new Stack<MainCommand>();
+    [SerializeField] Stack<MainCommand> _undoCommandList = new Stack<MainCommand>();
 
     private void OnEnable()
     {
@@ -43,18 +44,15 @@ public class CommandInvoker : MonoBehaviour
     {
         _undoCommandList.Clear();
         _commandList.Push(newCommand);
+        newCommand.AddMono(this);
         newCommand.Execute();
     }
 
     public void UndoCommand()
     {
+        Debug.Log("Undo");
         if (_commandList.Count > 0)
         {
-            latestCommand = _commandList.First();
-            if (!latestCommand.Undo())
-            {
-                return;
-            }
             latestCommand = _commandList.Pop();
             _undoCommandList.Push(latestCommand);
             latestCommand.Undo();
