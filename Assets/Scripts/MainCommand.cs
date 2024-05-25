@@ -18,18 +18,14 @@ public class MainCommand : ICommand
         }
     }
 
-    public bool Undo()
+    public void Undo()
     {
         monoBehaviour.StartCoroutine(UndoFor());
-        return true;
     }
 
     public void Redo()
     {
-        for (int i = 0; i < _commandList.Count; i++)
-        {
-            _commandList[i].Redo();
-        }
+        monoBehaviour.StartCoroutine(RedoFor());
     }
 
     public void AddCommand(ICommand command)
@@ -49,6 +45,15 @@ public class MainCommand : ICommand
         {
             Debug.Log(_commandList[i] + " " + Time.time);
             _commandList[i].Undo();
+            yield return new WaitForSeconds(_commandList[i].ReturnExecutionTime());
+        }
+    }
+
+    IEnumerator RedoFor()
+    {
+        for (int i = 0; i < _commandList.Count; i++)
+        {
+            _commandList[i].Redo();
             yield return new WaitForSeconds(_commandList[i].ReturnExecutionTime());
         }
     }
