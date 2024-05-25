@@ -27,27 +27,9 @@ public class MoveCommand : ICommand
         _movement.Move(_dir, _transform);
     }
 
-    public bool Undo()
+    public void Undo()
     {
-        Debug.Log("MoveUndoTry");
         _movement.Move(-_dir, _transform);
-        //if (_transform.GetComponentInParent<GridParent>().GridParentdIndex == LastParentIndex || _transform.GetComponentInParent<GridParent>().GridParentdIndex == 0)
-        //{
-        //    Debug.Log("True Undo: " + _transform.GetComponentInParent<GridParent>().GridParentdIndex + " == " + LastParentIndex + " Time: " + _time);
-        //    _movement.Move(-_dir, _transform);
-        //    return true;
-        //}
-        //else
-        //{
-        //    for (int i = 0; i < ObjectsToMove.Count; i++)
-        //    {
-        //        Transform newTransform = ObjectsToMove[i].ChangeParent(LastParentIndex);
-        //        _transform = newTransform != null ? newTransform : _transform;
-        //    }
-        //    _movement.Move(-_dir, _transform);
-        //    Debug.Log("False Undo: " + _transform.GetComponentInParent<GridParent>().GridParentdIndex + " == " + LastParentIndex + " Time: " + _time);
-        //}
-        return true;
     }
 
     public void Redo()

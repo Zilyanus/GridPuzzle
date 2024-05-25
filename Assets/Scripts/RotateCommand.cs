@@ -55,10 +55,9 @@ public class RotateCommand : ICommand
         });
     }
 
-    public bool Undo()
+    public void Undo()
     {
         Rotate(-RotateValue);
-        return true;
     }
 
     public void Redo()

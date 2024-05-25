@@ -118,9 +118,9 @@ public class CombineCommand : ICommand
         }
     }
 
-    public bool Undo()
+    public void Undo()
     {
-        return true;
+        
     }
 
     public void Redo()
