@@ -9,24 +9,35 @@ using ZilyanusLib.Audio;
 public class CollectableScript : MonoBehaviour
 {
     public static event Action OnSpawned;
-    public static event Action OnCollected;
-    bool isCollected;
+    public bool isCollected;
 
     [SerializeField] LayerMask GridMask;
 
     [SerializeField] Transform Effect;
 
     [SerializeField] SoundData soundData;
+
+    public static event Action<ICommand> OnCommandCreated;
     private void Start()
     {
         OnSpawned?.Invoke();
 
+        Effect.DOScale(0.85f, 0.5f).OnComplete(() => Effect.DOScale(0.8f, 0.5f)).SetLoops(-1,LoopType.Yoyo);
+    }
+
+    private void OnEnable()
+    {
+        ControlParent();
+    }
+
+    void ControlParent()
+    {
         RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one, 0, Vector2.down, 0.1f, GridMask);
 
         if (hit)
         {
             GridParent gridParent = null;
-            if (hit.transform.parent != null)
+            if (hit.transform.GetComponentInParent<GridParent>() != null)
             {
                 gridParent = hit.transform.GetComponentInParent<GridParent>();
             }
@@ -37,8 +48,6 @@ public class CollectableScript : MonoBehaviour
 
             transform.parent = gridParent.transform;
         }
-
-        Effect.DOScale(0.85f, 0.5f).OnComplete(() => Effect.DOScale(0.8f, 0.5f)).SetLoops(-1,LoopType.Yoyo);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -51,9 +60,8 @@ public class CollectableScript : MonoBehaviour
 
     public void Collected()
     {
+        EatCommand eatCommand = new EatCommand(transform,this);
+        OnCommandCreated.Invoke(eatCommand);
         AudioClass.PlayAudio(soundData);
-        isCollected = true;
-        OnCollected?.Invoke();
-        transform.DOScale(1.5f,0.25f).OnComplete(()=>transform.DOScale(0f, 0.3f).OnComplete(() => Destroy(gameObject)));       
     }
 }

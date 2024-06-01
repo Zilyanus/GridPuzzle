@@ -15,10 +15,13 @@ public class GridParent : SurroundControl
     public int GridParentdIndex;
 
     [SerializeField] int ChildCount;
+
+    public bool isSpawnedFromUndo;
     // Start is called before the first frame update
     void Start()
     {
-        ControlSurround();
+        if (!isSpawnedFromUndo)
+            ControlSurround();
     }
 
     public void RegainIndex()
@@ -41,6 +44,11 @@ public class GridParent : SurroundControl
 
     public override void ControlSurround()
     {
+        for (int i = 0; i < Grids.Count; i++)
+        {
+            Grids[i].ControlSurround();
+        }
+
         SetSurroundAtIndex(0, Control(new Vector2(0, 0),0));
         SetSurroundAtIndex(1, Control(new Vector2(1, 0),1));
         SetSurroundAtIndex(2, Control(new Vector2(2, 0),2));
@@ -53,10 +61,8 @@ public class GridParent : SurroundControl
         int SurroundInt = 0;
         for (int i = 0; i < Grids.Count; i++)
         {
-            Grids[i].ControlSurround();
             if (Grids[i].GetSurroundAtIndex(index) == 4 && Grids[i].GetPuzzleGridAtIndex(index) != null)
             {
-                //Debug.Log(i + " " + Grids[i].GetPuzzleGridAtIndex(index));
                 SetPuzzleGridAtIndex(index,Grids[i].GetPuzzleGridAtIndex(index)); 
                 SurroundInt = 4;
             }
@@ -93,9 +99,5 @@ public class GridParent : SurroundControl
             if (Grids[i].GetTransform().GetComponent<GridScript>() != null)
                 Grids[i].GetTransform().DOScale(1.3f, 0.15f).SetLoops(2, LoopType.Yoyo);
         }
-    }
-    public override Transform ChangeParent(int index)
-    {
-        return null;
     }
 }

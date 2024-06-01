@@ -64,9 +64,4 @@ public class PlayerSurrounding : SurroundControl
     {
         ControlSurround();
     }
-
-    public override Transform ChangeParent(int index)
-    {
-        return null;
-    }
 }

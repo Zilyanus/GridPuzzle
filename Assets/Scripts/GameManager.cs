@@ -54,7 +54,9 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         CollectableScript.OnSpawned += CollectableSpawned;
-        CollectableScript.OnCollected += CollectableCollected;
+        EatCommand.OnCollected += CollectableCollected;
+
+        EatCommand.OnReturned += CollectableReturned;
 
         PlayerMovement.OnMoved += OnPlayerMoved;
     }
@@ -62,7 +64,9 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         CollectableScript.OnSpawned -= CollectableSpawned;
-        CollectableScript.OnCollected -= CollectableCollected;
+        EatCommand.OnCollected -= CollectableCollected;
+
+        EatCommand.OnReturned -= CollectableReturned;
 
         PlayerMovement.OnMoved -= OnPlayerMoved;
     }
@@ -84,9 +88,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnPlayerMoved()
+    void OnPlayerMoved(int value)
     {
-        MoveCount++;
+        MoveCount+=value;
 
         if (MoveCount > MoveCountFor0Star)
         {
@@ -103,6 +107,7 @@ public class GameManager : MonoBehaviour
 
     void CollectableCollected()
     {
+        Debug.Log("Collected");
         CollectedCount++;
 
         if (CollectableCount == CollectedCount)
@@ -114,6 +119,11 @@ public class GameManager : MonoBehaviour
         {
             OnFishAted.Invoke();
         }
+    }
+
+    void CollectableReturned()
+    {
+        CollectedCount--;
     }
 
     void EndTheGame()

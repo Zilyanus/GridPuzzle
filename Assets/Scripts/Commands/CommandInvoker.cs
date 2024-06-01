@@ -9,27 +9,35 @@ public class CommandInvoker : SerializedMonoBehaviour
     [SerializeField] MainCommand latestCommand;
     [SerializeField] Stack<MainCommand> _commandList = new Stack<MainCommand>();
     [SerializeField] Stack<MainCommand> _undoCommandList = new Stack<MainCommand>();
-
     private void OnEnable()
     {
         PlayerMovement.MoveCommandAction += AddCommand;
-        GridManager.CombineCommandAction += AddExistingCommand;
+        GridManager.CombineCommandAction += GetCombineCommand;
 
         PlayerMovement.OnUndoPressed += UndoCommand;
         PlayerMovement.OnRedoPressed += RedoCommand;
 
         PuzzleGrid.OnPuzzleGridTriggered += AddExistingCommand;
+
+        CollectableScript.OnCommandCreated += AddExistingCommand;
     }
 
     private void OnDisable()
     {
         PlayerMovement.MoveCommandAction -= AddCommand;
-        GridManager.CombineCommandAction -= AddExistingCommand;
+        GridManager.CombineCommandAction -= GetCombineCommand;
 
         PlayerMovement.OnUndoPressed -= UndoCommand;
         PlayerMovement.OnRedoPressed -= RedoCommand;
 
         PuzzleGrid.OnPuzzleGridTriggered -= AddExistingCommand;
+
+        CollectableScript.OnCommandCreated -= AddExistingCommand;
+    }
+
+    public void GetCombineCommand(ICommand newCommand)
+    {
+        AddExistingCommand(newCommand);
     }
 
     public void AddExistingCommand(ICommand newCommand)
@@ -50,7 +58,6 @@ public class CommandInvoker : SerializedMonoBehaviour
 
     public void UndoCommand()
     {
-        Debug.Log("Undo");
         if (_commandList.Count > 0)
         {
             latestCommand = _commandList.Pop();
@@ -67,5 +74,5 @@ public class CommandInvoker : SerializedMonoBehaviour
             _commandList.Push(latestCommand);
             latestCommand.Redo();
         }
-    }
+    } 
 }

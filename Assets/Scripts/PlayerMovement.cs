@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] LayerMask GridMask;
 
-    public static event Action OnMoved;
+    public static event Action<int> OnMoved;
     public static event Action OnUndoPressed;
     public static event Action OnRedoPressed;
 
@@ -222,14 +222,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
-    public void Move(Vector3 dir, Transform transform)
+    public void Move(Vector3 dir, Transform transform, int value = 1)
     {
         AudioClass.PlayAudio(soundData);
 
         movementTimeSpeedMap[dir] += Time.deltaTime;
         if (!DOTween.IsTweening(transform))
         {
-            OnMoved.Invoke();
+            OnMoved.Invoke(value);
             transform.DOMove(transform.position + dir, 0.332f / Speed).SetEase(Ease.InOutCubic).OnComplete(() => 
             {                
                 transform.GetComponent<SurroundControl>().ControlSurround();

@@ -20,7 +20,7 @@ public class GridManager : MonoBehaviour
     }
 
     void CombineGrids(GameObject g1,GameObject g2)
-    {       
+    {
         CombineCommand command = new CombineCommand(g1,g2,SubGrid);
         CombineCommandAction(command);      
     }

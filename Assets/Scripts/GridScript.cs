@@ -50,14 +50,14 @@ public class GridScript : SurroundControl
         DebugFloats2[index] = Pos + vector2 * 4 / 10;
         if (hit && hit.collider.gameObject.layer == 3 && hit.collider.gameObject != gameObject)
         {
-            OnCombineGrids.Invoke(gameObject, hit.collider.gameObject);
+            if (GetComponentInParent<GridParent>() == null || hit.collider.GetComponentInParent<GridParent>() == null || (hit.collider.GetComponentInParent<GridParent>() != null && GetComponentInParent<GridParent>() != null && GetComponentInParent<GridParent>() != hit.collider.GetComponentInParent<GridParent>()))
+                OnCombineGrids.Invoke(gameObject, hit.collider.gameObject);
             return 1;
         }
         else if (hit && hit.collider.gameObject.layer == 11)
         {
             hit.collider.gameObject.GetComponent<PuzzleGrid>().MainObjects[-vector2] = transform;
             SetPuzzleGridAtIndex(index, hit.collider.gameObject.GetComponent<PuzzleGrid>());
-            //Debug.Log("HEY " + GetPuzzleGridAtIndex(index));
             return 4;
         }
         else if (hit && hit.collider.gameObject.layer == 7)
@@ -85,10 +85,5 @@ public class GridScript : SurroundControl
         gridParent.ControlChilds();
 
         return gridParent;
-    }
-
-    public override Transform ChangeParent(int index)
-    {
-        return null;
     }
 }

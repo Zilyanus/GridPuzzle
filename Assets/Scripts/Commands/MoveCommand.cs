@@ -7,19 +7,12 @@ public class MoveCommand : ICommand
     PlayerMovement _movement;
     Vector3 _dir;
     Transform _transform;
-    List<ISurroundable> ObjectsToMove = new List<ISurroundable>();
-
-    int LastParentIndex;
-    float _time;
 
     public MoveCommand(PlayerMovement movement, Vector3 Dir, Transform transform)
     {
         _movement = movement;
         _dir = Dir;
         _transform = transform;
-        ObjectsToMove = transform.GetComponentInParent<GridParent>().Grids;
-        LastParentIndex = transform.GetComponentInParent<GridParent>().GridParentdIndex;
-        _time = Time.time;
     }
 
     public void Execute()
@@ -29,7 +22,7 @@ public class MoveCommand : ICommand
 
     public void Undo()
     {
-        _movement.Move(-_dir, _transform);
+        _movement.Move(-_dir, _transform, -1);
     }
 
     public void Redo()

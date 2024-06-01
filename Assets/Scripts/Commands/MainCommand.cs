@@ -43,7 +43,6 @@ public class MainCommand : ICommand
     {
         for (int i = _commandList.Count - 1; i >= 0; i--)
         {
-            Debug.Log(_commandList[i] + " " + Time.time);
             _commandList[i].Undo();
             yield return new WaitForSeconds(_commandList[i].ReturnExecutionTime());
         }
@@ -54,7 +53,18 @@ public class MainCommand : ICommand
         for (int i = 0; i < _commandList.Count; i++)
         {
             _commandList[i].Redo();
+            if (i != 0)
+            {
+                Debug.Log("Removed" + _commandList[i]);
+                RemoveCommand(_commandList[i]);
+            }
+
             yield return new WaitForSeconds(_commandList[i].ReturnExecutionTime());
         }
+    }
+
+    void RemoveCommand(ICommand command)
+    {
+        _commandList.Remove(command);
     }
 }

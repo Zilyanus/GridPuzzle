@@ -1,9 +1,10 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SurroundControl : MonoBehaviour, ISurroundable
+public abstract class SurroundControl : SerializedMonoBehaviour, ISurroundable
 {
     /*
      * -1: Out of level
@@ -54,7 +55,5 @@ public abstract class SurroundControl : MonoBehaviour, ISurroundable
     {
         return transform;
     }
-
-    public abstract Transform ChangeParent(int index);
 }
     

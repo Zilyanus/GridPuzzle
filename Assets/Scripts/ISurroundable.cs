@@ -16,8 +16,5 @@ public interface ISurroundable
     void SetPuzzleGridAtIndex(int index, PuzzleGrid puzzleGrid);
     PuzzleGrid GetPuzzleGridAtIndex(int index);
 
-    Transform ChangeParent(int index);
-
     Transform GetTransform();
-
 }

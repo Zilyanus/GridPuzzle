@@ -693,6 +693,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6857157019362734305, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6857157019362734305, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
     - target: {fileID: 8749148134391329888, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -786,6 +790,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6857157019362734305, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6857157019362734305, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
     - target: {fileID: 8749148134391329889, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1891,6 +1899,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 87080453425988849, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 87080453425988849, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
     - target: {fileID: 234718858381330892, guid: 9e0148180264fb24589501a16a01df2d, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2208,6 +2220,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6857157019362734305, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6857157019362734305, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
     - target: {fileID: 8749148134391329888, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -3626,6 +3642,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8329185752008863578, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8329185752008863578, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
     - target: {fileID: 8329185752008863579, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3670,6 +3690,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
     - target: {fileID: 8329185752008863581, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3715,6 +3739,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6857157019362734305, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6857157019362734305, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
     - target: {fileID: 8749148134391329888, guid: 5c4462a9b8d7394428907ce46b2c0b14, type: 3}
       propertyPath: m_SortingLayer
       value: 1

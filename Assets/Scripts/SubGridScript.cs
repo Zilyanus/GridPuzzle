@@ -35,9 +35,4 @@ public class SubGridScript : SurroundControl
         SetSurroundAtIndex(2, Control(Vector2.right,2));
         SetSurroundAtIndex(3, Control(-Vector2.right,3));
     }
-
-    public override Transform ChangeParent(int index)
-    {
-        return null;
-    }
 }
