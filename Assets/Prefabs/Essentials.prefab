@@ -89,6 +89,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fd603346d398f48a21ed6d38947318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: latestCommand
+      Entry: 6
+      Data: 
+    - Name: _commandList
+      Entry: 7
+      Data: 0|System.Collections.Generic.Stack`1[[MainCommand, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _undoCommandList
+      Entry: 7
+      Data: 1|System.Collections.Generic.Stack`1[[MainCommand, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1 &3592465476867661226
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,9 +263,57 @@ Transform:
   - {fileID: 5851238326019138133}
   - {fileID: 5209667079311114169}
   - {fileID: 4006892556976355415}
+  - {fileID: 8009025662422218063}
   m_Father: {fileID: 234718858381330892}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6108272101664308692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8009025662422218063}
+  - component: {fileID: 2824280154503419308}
+  m_Layer: 0
+  m_Name: UndoController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8009025662422218063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108272101664308692}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5851238327512913403}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2824280154503419308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108272101664308692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8902436925fef649bb19e27af806c40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UndoButton: {fileID: 3539833256547870585}
+  RedoButton: {fileID: 6634150883414639843}
+  CommandInvoker: {fileID: 87080453425988849}
 --- !u!1001 &478834850288953044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -566,6 +652,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2162962844153381734, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162962844153381734, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2824280154503419308}
+    - target: {fileID: 2162962844153381734, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UndoButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162962844153381734, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UndoController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2605955949173337455, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -589,6 +691,22 @@ PrefabInstance:
     - target: {fileID: 2645663241928337891, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PauseManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044672798217253499, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044672798217253499, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2824280154503419308}
+    - target: {fileID: 3044672798217253499, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RedoButtonPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044672798217253499, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UndoController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3231953611739832956, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -766,6 +884,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8802532887786688020, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
   m_PrefabInstance: {fileID: 7230392979243991198}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3539833256547870585 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6158540053887281127, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+  m_PrefabInstance: {fileID: 7230392979243991198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4654234220715064917 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2648307098821148363, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
@@ -824,6 +953,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6634150883414639843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4055131990483469437, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+  m_PrefabInstance: {fileID: 7230392979243991198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6647963220796493280 stripped

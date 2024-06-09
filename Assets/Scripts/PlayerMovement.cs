@@ -67,12 +67,22 @@ public class PlayerMovement : MonoBehaviour
     {
         GameManager.OnGameFinished.AddListener(OnGameFinished);
         PauseManager.OnPausedChanged.AddListener(OnPausedChange);
+
+        UndoController.OnUndoButtonPressed += UndoPressed;
+        UndoController.OnRedoButtonPressed += RedoPressed;
+        StartAnimationScript.StartingAnimationEnded.AddListener(() => { isStartAnimationEnded = true; });
+
     }
 
     private void OnDisable()
     {
         GameManager.OnGameFinished.RemoveListener(OnGameFinished);
         PauseManager.OnPausedChanged.RemoveListener(OnPausedChange);
+
+        UndoController.OnUndoButtonPressed -= UndoPressed;
+        UndoController.OnRedoButtonPressed -= RedoPressed;
+
+        StartAnimationScript.StartingAnimationEnded.RemoveListener(() => { isStartAnimationEnded = true; });
     }
 
     private void Start()
@@ -97,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
             transform.parent = gridParent.transform;
         }
 
-        StartAnimationScript.StartingAnimationEnded.AddListener(() => { isStartAnimationEnded = true; }); 
+        //StartAnimationScript.StartingAnimationEnded.AddListener(() => { isStartAnimationEnded = true; }); 
     }
 
     // Update is called once per frame
@@ -159,15 +169,13 @@ public class PlayerMovement : MonoBehaviour
             MoveControl(1, "Y", Movement.y, Vector3.down);
         }
 
-        if (InputActions.Player.UndoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform) && !PressedUndo && !playerRotationScript.isRotating)
+        if (InputActions.Player.UndoButton.ReadValue<float>() != 0)
         {
-            PressedUndo = true;
-            OnUndoPressed.Invoke();
+            UndoPressed();
         }
-        else if (InputActions.Player.RedoButton.ReadValue<float>() != 0 && !DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform) && !PressedRedo && !playerRotationScript.isRotating)
+        else if (InputActions.Player.RedoButton.ReadValue<float>() != 0)
         {
-            PressedRedo = true;
-            OnRedoPressed.Invoke();
+            RedoPressed();
         }
 
         if (InputActions.Player.UndoButton.ReadValue<float>() == 0)
@@ -277,5 +285,23 @@ public class PlayerMovement : MonoBehaviour
     void OnGameFinished()
     {
         isGameFinished = true;
+    }
+
+    void UndoPressed()
+    {
+        if (!DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform) && !PressedUndo && !playerRotationScript.isRotating && !isGameFinished)
+        {
+            PressedUndo = true;
+            OnUndoPressed.Invoke();
+        }
+    }
+
+    void RedoPressed()
+    {
+        if (!DOTween.IsTweening(transform) && !DOTween.IsTweening(gridParent.transform) && !PressedRedo && !playerRotationScript.isRotating && !isGameFinished)
+        {
+            PressedRedo = true;
+            OnRedoPressed.Invoke();
+        }
     }
 }

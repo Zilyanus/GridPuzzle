@@ -7,8 +7,8 @@ using UnityEngine;
 public class CommandInvoker : SerializedMonoBehaviour
 {
     [SerializeField] MainCommand latestCommand;
-    [SerializeField] Stack<MainCommand> _commandList = new Stack<MainCommand>();
-    [SerializeField] Stack<MainCommand> _undoCommandList = new Stack<MainCommand>();
+    public Stack<MainCommand> _commandList = new Stack<MainCommand>();
+    public Stack<MainCommand> _undoCommandList = new Stack<MainCommand>();
     private void OnEnable()
     {
         PlayerMovement.MoveCommandAction += AddCommand;

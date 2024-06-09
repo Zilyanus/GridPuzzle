@@ -183,7 +183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &417252470018993614
 Transform:
   m_ObjectHideFlags: 0
@@ -998,6 +998,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f300f62e3fec8d74e9dc484eadd591b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   layerMask:
     serializedVersion: 2
     m_Bits: 3784
@@ -1018,6 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5afbbf0ba833c74cbecf6757a0c8f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRotating: 0
 --- !u!114 &9007767698803097760
 MonoBehaviour:
   m_ObjectHideFlags: 0
