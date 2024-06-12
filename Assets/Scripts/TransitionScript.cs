@@ -15,12 +15,12 @@ public class TransitionScript : MonoBehaviour
     public static event Action<int> OnTransitionTriggered;
     private void OnEnable()
     {
-        LevelSelector.OnLevelClicked.AddListener(OnLevelClicked);
+        CharacterLevelIcon.OnLevelTranslate.AddListener(OnLevelClicked);
     }
 
     private void OnDisable()
     {
-        LevelSelector.OnLevelClicked.RemoveListener(OnLevelClicked);
+        CharacterLevelIcon.OnLevelTranslate.RemoveListener(OnLevelClicked);
     }
 
     public void LoadLastLevel()

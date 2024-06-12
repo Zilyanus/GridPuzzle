@@ -31,7 +31,8 @@ public class LevelSelector : MonoBehaviour
 
     [SerializeField] Color LockColor;
 
-    public static UnityEvent<int> OnLevelClicked = new UnityEvent<int>();
+    public static UnityEvent<int,Vector3> OnLevelClicked = new UnityEvent<int,Vector3>();
+    public static UnityEvent<Vector3> OnCursorSpawn = new UnityEvent<Vector3>();
 
     [SerializeField] GameObject BarierObject;
     [SerializeField] TextMeshProUGUI BarierObjectText;
@@ -51,6 +52,7 @@ public class LevelSelector : MonoBehaviour
         {
             lineRenderer.startColor = LockColor;
             lineRenderer.endColor = LockColor;
+            OnCursorSpawn.Invoke(transform.position);
         }
 
         if (isLocked)
@@ -132,6 +134,6 @@ public class LevelSelector : MonoBehaviour
     private void OnMouseUp()
     {
         if (!isLocked)
-            OnLevelClicked.Invoke(LevelIndex);
+            OnLevelClicked.Invoke(LevelIndex,transform.position);
     }
 }
