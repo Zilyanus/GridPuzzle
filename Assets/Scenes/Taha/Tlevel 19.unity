@@ -3546,6 +3546,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8329185752008863578, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8329185752008863578, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
     - target: {fileID: 8329185752008863579, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3589,6 +3593,46 @@ PrefabInstance:
     - target: {fileID: 8329185752008863579, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: Speed
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: "pressedT\u0131meSpeedCurve.m_Curve.Array.data[1].time"
+      value: 0.82337254
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: "pressedT\u0131meSpeedCurve.m_Curve.Array.data[0].value"
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: "pressedT\u0131meSpeedCurve.m_Curve.Array.data[1].value"
+      value: 1.4070481
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: "pressedT\u0131meSpeedCurve.m_Curve.Array.data[1].inSlope"
+      value: 0.7245797
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: "pressedT\u0131meSpeedCurve.m_Curve.Array.data[2].inSlope"
+      value: 0.5067382
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: "pressedT\u0131meSpeedCurve.m_Curve.Array.data[1].outSlope"
+      value: 0.7245797
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: "pressedT\u0131meSpeedCurve.m_Curve.Array.data[2].inWeight"
+      value: 0.43278238
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: "pressedT\u0131meSpeedCurve.m_Curve.Array.data[2].outSlope"
+      value: 0.5067382
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329185752008863580, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
+      propertyPath: "pressedT\u0131meSpeedCurve.m_Curve.Array.data[1].outWeight"
+      value: 0.3199134
       objectReference: {fileID: 0}
     - target: {fileID: 8329185752008863581, guid: 83ef68f11bd9f0c43b8b49462edf83c1, type: 3}
       propertyPath: m_Name
