@@ -28,9 +28,16 @@ public class CharacterLevelIcon : MonoBehaviour
 
     private void OnLevelClicked(int level,Vector3 Pos)
     {
-        transform.DOMove(Pos, 0.3f).OnComplete(() =>
+        if (Pos != transform.position)
         {
-            OnLevelTranslate.Invoke(level + 2);
-        });
+            transform.DOMove(Pos, 0.3f).OnComplete(() =>
+            {
+                OnLevelTranslate.Invoke(level);
+            });
+        }
+        else
+        {
+            OnLevelTranslate.Invoke(level);
+        }
     }
 }
