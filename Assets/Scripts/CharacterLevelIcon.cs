@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using ZilyanusLib.Audio;
 
 public class CharacterLevelIcon : MonoBehaviour
 {
     public static UnityEvent<int> OnLevelTranslate = new UnityEvent<int>();
 
-    [SerializeField] GameObject Cursor;
+    [SerializeField] SoundData MoveSound;
     private void OnEnable()
     {
         LevelSelector.OnLevelClicked.AddListener(OnLevelClicked);
@@ -30,6 +31,7 @@ public class CharacterLevelIcon : MonoBehaviour
     {
         if (Pos != transform.position)
         {
+            AudioClass.PlayAudio(MoveSound);
             transform.DOMove(Pos, 0.3f).OnComplete(() =>
             {
                 OnLevelTranslate.Invoke(level);

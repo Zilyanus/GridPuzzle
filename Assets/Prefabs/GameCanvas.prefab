@@ -1034,6 +1034,9 @@ MonoBehaviour:
   LoseSound:
     SoundName: LoseSound
     Volume: 1
+  StarSound:
+    SoundName: StarSound
+    Volume: 1
 --- !u!1 &2415908717696733408
 GameObject:
   m_ObjectHideFlags: 0

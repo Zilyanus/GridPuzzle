@@ -33,6 +33,10 @@ MonoBehaviour:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - Cinemachine
+    - Febucci.Attributes.Runtime
+    - Febucci.TextAnimator.Demo.Runtime
+    - Febucci.TextAnimator.Runtime
+    - Febucci.TextAnimator.TMP.Runtime
     - UniTask
     - UniTask.Addressables
     - UniTask.DOTween

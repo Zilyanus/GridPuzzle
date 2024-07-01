@@ -14,6 +14,8 @@ public class EndPanelScript : MonoBehaviour
     [SerializeField] List<GameObject> WinLosePanels;
 
     [SerializeField] SoundData LoseSound;
+
+    [SerializeField] SoundData StarSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +76,7 @@ public class EndPanelScript : MonoBehaviour
 
             sequence1.OnComplete(() =>
             {
+                AudioClass.PlayAudio(StarSound);
                 sequence1.Kill();
             });
             yield return new WaitForSeconds(0.2f);

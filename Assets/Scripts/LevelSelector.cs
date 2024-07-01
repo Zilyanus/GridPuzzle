@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using ZilyanusLib.Audio;
 
 [SelectionBase]
 public class LevelSelector : MonoBehaviour
@@ -38,6 +39,9 @@ public class LevelSelector : MonoBehaviour
     [SerializeField] TextMeshProUGUI BarierObjectText;
 
     LevelSelectionManager levelSelectionManager;
+
+    [SerializeField] SoundData HoverSound;
+    [SerializeField] SoundData LockedSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -121,19 +125,26 @@ public class LevelSelector : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (!isLocked)
-            MainObject.DOScale(1.2f, 0.3f);
+        if (isLocked)
+            return;
+
+        MainObject.DOScale(1.2f, 0.3f);
+        AudioClass.PlayAudio(HoverSound);
     }
 
     private void OnMouseExit()
     {
-        if (!isLocked)
-            MainObject.DOScale(1f, 0.3f);
+        if (isLocked)
+            return;
+
+        MainObject.DOScale(1f, 0.3f);
     }
 
     private void OnMouseUp()
     {
         if (!isLocked)
             OnLevelClicked.Invoke(LevelIndex,transform.position);
+        else
+            AudioClass.PlayAudio(LockedSound);
     }
 }
