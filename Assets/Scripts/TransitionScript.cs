@@ -23,13 +23,21 @@ public class TransitionScript : MonoBehaviour
         CharacterLevelIcon.OnLevelTranslate.RemoveListener(OnLevelClicked);
     }
 
+    public void StartGameViaMainMenu()
+    {
+        CoolMathApiScript.StartGameEvent();
+        LoadLastLevel();
+    }
+
     public void LoadLastLevel()
     {
         LoadLevelViaEndGame(ES3.Load("LastLevel", 0) + 2);
     }
 
-    public void LoadLevel(int index)
+    public void LoadLevel(int index, bool isRestart = false)
     {
+        if (index > 1 && !isRestart)
+            CoolMathApiScript.StartLevelEvent(index - 1);
         SceneToLoad = index;
         OnTransitionTriggered.Invoke(SceneToLoad);
     }
@@ -65,14 +73,16 @@ public class TransitionScript : MonoBehaviour
         }
         else
         {
+            CoolMathAds.instance.InitiateAds();
             LoadLevel(Level);
         }
     }
 
     public void RestartLevel()
     {
+        CoolMathApiScript.ReplayEvent();
         int CurrentLevel = SceneManager.GetActiveScene().buildIndex;
-        LoadLevel(CurrentLevel);
+        LoadLevel(CurrentLevel,true);
     }
 
     private void OnLevelClicked(int level) 

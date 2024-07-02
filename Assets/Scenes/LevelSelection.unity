@@ -4402,6 +4402,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d627324ae5c06484eab63639358c8bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveSound:
+    SoundName: IconMoveSound
+    Volume: 1
 --- !u!4 &1122288173
 Transform:
   m_ObjectHideFlags: 0
