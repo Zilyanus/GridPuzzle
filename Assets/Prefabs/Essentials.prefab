@@ -646,7 +646,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1199512290903624747, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: WinSound.Volume
-      value: 1
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199512290903624747, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: LoseSound.Volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199512290903624747, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: StarSound.Volume
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1199512290903624747, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: WinSound.SoundName

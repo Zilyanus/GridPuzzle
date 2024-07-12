@@ -92,7 +92,7 @@ public class GridParent : SurroundControl
 
     public void CombineFeel()
     {
-        AudioClass.PlayAudio("MergeSound",1);
+        AudioClass.PlayAudio("MergeSound",.1f);
 
         for (int i = 0; i < Grids.Count; i++)
         {

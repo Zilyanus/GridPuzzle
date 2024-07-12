@@ -75,10 +75,10 @@ public class EndPanelScript : MonoBehaviour
 
             sequence1.Append(Starts[i].GetComponent<RectTransform>().DOScale(Scale, 0.5f).SetEase(Ease.OutBack));
             sequence1.Join(Starts[i].GetComponent<RectTransform>().DOPunchRotation(Vector3.forward * 15, 0.5f).SetEase(Ease.OutBack));
+            sequence1.Join(DOVirtual.DelayedCall(0,() => { AudioClass.PlayAudio(StarSound); }));
 
             sequence1.OnComplete(() =>
-            {
-                AudioClass.PlayAudio(StarSound);
+            {                
                 sequence1.Kill();
             });
             yield return new WaitForSeconds(0.2f);

@@ -40,7 +40,7 @@ public class LevelSelector : MonoBehaviour
 
     LevelSelectionManager levelSelectionManager;
 
-    [SerializeField] SoundData HoverSound;
+    [SerializeField] SoundData ClickSound;
     [SerializeField] SoundData LockedSound;
     // Start is called before the first frame update
     void Start()
@@ -129,7 +129,6 @@ public class LevelSelector : MonoBehaviour
             return;
 
         MainObject.DOScale(1.2f, 0.3f);
-        AudioClass.PlayAudio(HoverSound);
     }
 
     private void OnMouseExit()
@@ -143,7 +142,10 @@ public class LevelSelector : MonoBehaviour
     private void OnMouseUp()
     {
         if (!isLocked)
+        {
+            AudioClass.PlayAudio(ClickSound);
             OnLevelClicked.Invoke(LevelIndex,transform.position);
+        }
         else
             AudioClass.PlayAudio(LockedSound);
     }

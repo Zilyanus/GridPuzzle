@@ -28,13 +28,11 @@ public class CombineCommand : ICommand
     {
         if (g1.GetComponentInParent<GridParent>() == null) 
         {
-            Debug.Log("G1GetParent");
             g1.GetComponent<GridScript>().TransformToGridParent();
         }
 
         if (g2.GetComponentInParent<GridParent>() == null)
         {
-            Debug.Log("G2GetParent");
             g2.GetComponent<GridScript>().TransformToGridParent();
         }
         return g1.GetComponentInParent<GridParent>();

@@ -1201,7 +1201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1875d88d81624458267ff9d82392cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StarRequired: 0
   lineRenderer: {fileID: 6790171381017933186}
   LevelIndex: 0
   LevelText: {fileID: 7373338824204156443}
@@ -1217,12 +1216,12 @@ MonoBehaviour:
   LockColor: {r: 0.5137255, g: 0.52156866, b: 0.6901961, a: 1}
   BarierObject: {fileID: 3323343228139361646}
   BarierObjectText: {fileID: 378045754544648535}
-  HoverSound:
-    SoundName: LevelHoverSound
+  ClickSound:
+    SoundName: ButtonSound
     Volume: 1
   LockedSound:
     SoundName: LevelLockedSound
-    Volume: 1
+    Volume: 0.3
 --- !u!61 &2818377963948875782
 BoxCollider2D:
   m_ObjectHideFlags: 0

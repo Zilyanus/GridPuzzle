@@ -317,13 +317,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e49feabc61750489b4e38f9e195938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCollected: 0
   GridMask:
     serializedVersion: 2
     m_Bits: 8
   Effect: {fileID: 6426360453462806924}
   soundData:
     SoundName: CatEatSound
-    Volume: 1
+    Volume: 0.02
 --- !u!50 &4629148823050252995
 Rigidbody2D:
   serializedVersion: 4

@@ -817,7 +817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NewMusic: {fileID: 0}
   NewMusics: []
-  Volume: 1
+  Volume: 0.04
   Speed: 0.3
 --- !u!82 &822163882
 AudioSource:
@@ -828,10 +828,10 @@ AudioSource:
   m_GameObject: {fileID: 822163880}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6801913538571061438, guid: 1a2e6cefab6913f43b5d003290d49e38, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 2a17d07ea1e6cf648bfcd921cb1e0aa0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.01
   m_Pitch: 1
   Loop: 1
   Mute: 0

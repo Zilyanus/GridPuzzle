@@ -14,12 +14,15 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameObject LoaderCanvas;
     [SerializeField] Image BgImage;
     [SerializeField] Animator animator;
+
+    AudioSource audioSource;
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             transform.parent = null;
+            audioSource = GetComponent<AudioSource>();
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -40,7 +43,7 @@ public class LevelManager : MonoBehaviour
 
     public async void LoadScene(int index)
     {
-        AudioClass.PlayAudio("TransitionSound", 1);
+        audioSource.Play();
         var scene = SceneManager.LoadSceneAsync(index);
         scene.allowSceneActivation = false;
 

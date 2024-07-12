@@ -52,7 +52,7 @@ namespace ZilyanusLib
                 audioSource.clip = clip;
                 audioSource.spatialBlend = 1f;
                 audioSource.volume = volume;
-                audioSource.pitch = Pitch;
+                audioSource.pitch = Random.Range(Pitch-0.05f, Pitch + 0.05f);
                 audioSource.Play();
                 Object.Destroy(gameObject, clip.length);
             }

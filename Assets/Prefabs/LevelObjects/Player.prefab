@@ -629,7 +629,7 @@ MonoBehaviour:
   Player: {fileID: 2470779447558313275}
   DropBoxSoundData:
     SoundName: DropBox
-    Volume: 1
+    Volume: 0.1
 --- !u!1 &5571197869650098450
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,7 +988,7 @@ MonoBehaviour:
     m_Bits: 8
   soundData:
     SoundName: MoveSound
-    Volume: 1
+    Volume: 0.1
 --- !u!114 &8329185752008863578
 MonoBehaviour:
   m_ObjectHideFlags: 0
