@@ -13,6 +13,7 @@ public class EndPanelScript : MonoBehaviour
 
     [SerializeField] List<GameObject> WinLosePanels;
 
+    [SerializeField] SoundData WinSound;
     [SerializeField] SoundData LoseSound;
 
     [SerializeField] SoundData StarSound;
@@ -37,6 +38,7 @@ public class EndPanelScript : MonoBehaviour
         }
         else
         {
+            AudioClass.PlayAudio(WinSound);
             WinLosePanels[1].SetActive(true);
         }
 

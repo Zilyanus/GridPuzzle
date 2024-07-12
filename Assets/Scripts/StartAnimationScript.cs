@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using ZilyanusLib.Audio;
 
 public class StartAnimationScript : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class StartAnimationScript : MonoBehaviour
 
     [SerializeField] GameObject StartObject;
     [SerializeField] SpriteRenderer Player;
+
+    [SerializeField] SoundData DropBoxSoundData;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +40,13 @@ public class StartAnimationScript : MonoBehaviour
             Player.enabled = true;
         }));
 
+        sequence.AppendInterval(1f);
+
         sequence.Append(transform.DOScale(1, 1).SetEase(Ease.InCubic));
+        sequence.Append(DOVirtual.DelayedCall(0.0f, () =>
+        {
+            AudioClass.PlayAudio(DropBoxSoundData);
+        }));
         sequence.AppendInterval(0.3f);
         sequence.Append(MiddlePart.DOFade(0, 0));
 

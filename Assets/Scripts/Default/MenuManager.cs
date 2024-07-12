@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using static UnityEngine.Rendering.DebugUI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -12,17 +13,16 @@ public class MenuManager : MonoBehaviour
     [SerializeField] AudioMixer audioMixer;
 
     [SerializeField] Image SoundImage;
-    [SerializeField] List<Sprite> SoundSprites;
+    [SerializeField] GameObject SoundSprites;
 
     [SerializeField] Image MusicImage;
-    [SerializeField] List<Sprite> MusicSprites;
+    [SerializeField] GameObject MusicSprites;
 
     [SerializeField] Slider SoundSlider;
     [SerializeField] Slider MusicSlider;
 
     [SerializeField] float OldSoundVolume;
     [SerializeField] float OldMusicVolume;
-
     // Start is called before the first frame update
     void Start()
     {       
@@ -36,6 +36,9 @@ public class MenuManager : MonoBehaviour
 
         OldSoundVolume = PlayerPrefs.GetFloat("OldSoundVolume");
         OldMusicVolume = PlayerPrefs.GetFloat("OldMusicVolume");
+
+        audioMixer.SetFloat("Sound", isSoundMuted ? -80f : 0f);
+        audioMixer.SetFloat("Music", isMusicMuted ? -80f : 0f);
     }
 
     // Update is called once per frame
@@ -47,9 +50,9 @@ public class MenuManager : MonoBehaviour
             PlayerPrefs.SetFloat("Music", MusicSlider.value);
 
         if(SoundImage != null)
-            SoundImage.sprite = isSoundMuted ? SoundSprites[0] : SoundSprites[1];
+            SoundSprites.SetActive(isSoundMuted ? true : false);
         if(MusicImage != null)
-            MusicImage.sprite = isMusicMuted ? MusicSprites[0] : MusicSprites[1];
+            MusicSprites.SetActive(isMusicMuted ? true : false);
     }
 
     public void SoundSliderChange(float value)
@@ -86,16 +89,17 @@ public class MenuManager : MonoBehaviour
         isSoundMuted = !isSoundMuted;
 
         PlayerPrefs.SetInt("isSoundMuted", isSoundMuted ? 1 : 0);
+        audioMixer.SetFloat("Sound", isSoundMuted ? -80f : 0f);
 
         if (isSoundMuted)
         {
-            OldSoundVolume = SoundSlider.value;
+            //OldSoundVolume = SoundSlider.value;
             PlayerPrefs.SetFloat("OldSoundVolume", OldSoundVolume);
-            SoundSlider.value = -80;
+            //SoundSlider.value = -80;
         }
         else
         {
-            SoundSlider.value = OldSoundVolume;
+            //SoundSlider.value = OldSoundVolume;
         }
     }
     public void PressMusicButton()
@@ -103,16 +107,17 @@ public class MenuManager : MonoBehaviour
         isMusicMuted = !isMusicMuted;
 
         PlayerPrefs.SetInt("isMusicMuted", isMusicMuted ? 1 : 0);
+        audioMixer.SetFloat("Music", isMusicMuted ? -80f:0f);
 
         if (isMusicMuted)
         {
-            OldMusicVolume = MusicSlider.value;
+            //OldMusicVolume = MusicSlider.value;
             PlayerPrefs.SetFloat("OldMusicVolume", OldSoundVolume);
-            MusicSlider.value = -80;
+            //MusicSlider.value = -80;
         }
         else
         {
-            MusicSlider.value = OldMusicVolume;
+            //MusicSlider.value = OldMusicVolume;
         }
     }
 }

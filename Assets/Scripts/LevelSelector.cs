@@ -11,7 +11,7 @@ using ZilyanusLib.Audio;
 [SelectionBase]
 public class LevelSelector : MonoBehaviour
 {
-    [SerializeField] int StarRequired = 0;
+    int StarRequired = 0;
 
     [SerializeField] LineRenderer lineRenderer;
 

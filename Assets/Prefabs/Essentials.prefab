@@ -617,12 +617,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 234718858381330892}
     m_Modifications:
     - target: {fileID: 648377926178381336, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648377926178381336, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6527108749596210800}
     - target: {fileID: 648377926178381336, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadLevel
+      value: BackToMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 687601529004099524, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -639,6 +643,14 @@ PrefabInstance:
     - target: {fileID: 1012164851028134265, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RestartLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199512290903624747, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: WinSound.Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199512290903624747, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
+      propertyPath: WinSound.SoundName
+      value: WinSound
       objectReference: {fileID: 0}
     - target: {fileID: 1199512290903624747, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: Starts.Array.data[1]
@@ -835,14 +847,6 @@ PrefabInstance:
     - target: {fileID: 5027022808749917269, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RestartLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217977499606803273, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 364
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217977499606803273, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 235
       objectReference: {fileID: 0}
     - target: {fileID: 7655060163607112614, guid: 7e1e3dec2e055f24d90f8f5580ef95eb, type: 3}
       propertyPath: ButtonUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target

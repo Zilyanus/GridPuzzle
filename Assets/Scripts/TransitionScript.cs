@@ -36,8 +36,10 @@ public class TransitionScript : MonoBehaviour
 
     public void LoadLevel(int index, bool isRestart = false)
     {
+#if !UNITY_EDITOR
         if (index > 1 && !isRestart)
             CoolMathApiScript.StartLevelEvent(index - 1);
+#endif
         SceneToLoad = index;
         OnTransitionTriggered.Invoke(SceneToLoad);
     }
@@ -61,6 +63,8 @@ public class TransitionScript : MonoBehaviour
         }
         else
         {
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+                CoolMathAds.instance.InitiateAds();
             LoadNextLevel();
         }
     }
@@ -73,14 +77,17 @@ public class TransitionScript : MonoBehaviour
         }
         else
         {
-            CoolMathAds.instance.InitiateAds();
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+                CoolMathAds.instance.InitiateAds();
             LoadLevel(Level);
         }
     }
 
     public void RestartLevel()
     {
+        #if !UNITY_EDITOR
         CoolMathApiScript.ReplayEvent();
+#endif
         int CurrentLevel = SceneManager.GetActiveScene().buildIndex;
         LoadLevel(CurrentLevel,true);
     }
@@ -93,5 +100,9 @@ public class TransitionScript : MonoBehaviour
     bool AnimatorIsFinished()
     {
         return animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1;
+    }
+    public void BackToMainMenu()
+    {
+        LoadLevel(0, true);
     }
 }

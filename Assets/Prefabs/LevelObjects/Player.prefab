@@ -627,6 +627,9 @@ MonoBehaviour:
   MiddlePart: {fileID: 1357880929100538466}
   StartObject: {fileID: 1966486879403458420}
   Player: {fileID: 2470779447558313275}
+  DropBoxSoundData:
+    SoundName: DropBox
+    Volume: 1
 --- !u!1 &5571197869650098450
 GameObject:
   m_ObjectHideFlags: 0
