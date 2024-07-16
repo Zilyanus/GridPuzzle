@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using static UnityEngine.Rendering.DebugUI;
 
 public class MenuManager : MonoBehaviour
 {

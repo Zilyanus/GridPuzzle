@@ -55,7 +55,6 @@ public class MainCommand : ICommand
             _commandList[i].Redo();
             if (i != 0)
             {
-                Debug.Log("Removed" + _commandList[i]);
                 RemoveCommand(_commandList[i]);
             }
 
